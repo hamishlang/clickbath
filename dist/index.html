@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+  <title>Firebase Proof of Concept</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+  <header class="container-fluid text-center">
+    <h1>Fire<span>Base</span></h1>
+  </header>
+  <div>
+    <h3>Add new messages</h3>
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <textarea id="newmessage" class="materialize-textarea"></textarea>
+            <label for="newmessage">Message</label>
+          </div>
+        </div>
+        <div>
+          <button class="btn waves-effect waves-light" type="submit" id="submit">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <table class="striped responsive-table">
+    <thead>
+      <tr>
+          <th>Message</th>
+          <th>Votes</th>
+          <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="message-container">
+    </tbody>
+  </table>
+  <!-- js -->
+  <script src="/src.e31bb0bc.js"></script>
+</body>
+</html>
