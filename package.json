@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.html",
   "license": "MIT",
+  "type": "module",
   "browserslist": [
     "defaults",
     "not IE 11",
