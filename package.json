@@ -23,7 +23,15 @@
   "author": "",
   "devDependencies": {
     "parcel-plugin-static-files-copy": "^2.6.0"
-  }
+  },
+  "staticFiles": {
+    "staticPath": [
+        {
+            "staticPath": "static",
+            "staticOutDir": "assets"
+        }
+    ]
+}
 }
 
 
