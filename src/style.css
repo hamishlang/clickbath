@@ -22,12 +22,12 @@ a {
 
 @font-face {
     font-family: recolata;
-    src: url(../assets/recolata.otf);
+    src: url(../static/recolata.otf);
 }
 
 @font-face {
     font-family: Salvaje;
-    src: url(../assets/Salvaje.otf);
+    src: url(../static/Salvaje.otf);
 }
 
 .title {
