@@ -1,4 +1,6 @@
 import * as database from './database';
+// import audio from '/assets/birds.mp3';
+
 
 const buildMessageRow = (messageItem) => {
   const newMessageRow = document.createElement('tr');
@@ -212,6 +214,7 @@ const flute = new Tone.Sampler({
     C6: "flute 1.mp3",
     C5: "flute 2.mp3",
     C4: "flute 3.mp3",
+    // C4: audio.flute 3.mp3,
 
     // A2: "A2.mp3",
   },

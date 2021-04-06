@@ -10,6 +10,7 @@
     "maintained node versions"
   ],
   "scripts": {
+    "prebuild": "rm -rf dist",
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
     "start": "parcel src/index.html --out-dir docs",
