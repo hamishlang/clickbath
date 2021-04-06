@@ -9,21 +9,23 @@ const db = firebase.firestore();
 
 export const messages = {
   updateVotes: (id, amount) => {
-    return db.collection("messages").doc(id).update({
+    return db.collection("clickbath").doc(id).update({
       votes: firebase.firestore.FieldValue.increment(amount)
     });
   },
   delete: (id) => {
-    return db.collection("messages").doc(id).delete();
+    return db.collection("clickbath").doc(id).delete();
   },
-  create: (message) => {
-    return db.collection("messages").add({
-      message,
+  create: (Name) => {
+    return db.collection("clickbath").add({
+      Name,
+      Tone1: $("input[name='tone1']:checked").val(), 
+      Tone2: $("input[name='tone2']:checked").val(), 
       votes: 0
     });
   },
   getAll: () => {
-    return db.collection('messages').get().then((snapshot) => {
+    return db.collection('clickbath').get().then((snapshot) => {
       return snapshot.docs.map(doc => {
         return {
           id: doc.id,
@@ -33,3 +35,6 @@ export const messages = {
     });
   }
 };
+
+
+

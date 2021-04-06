@@ -6,7 +6,7 @@
 $(".areaShow").hide();
 $(".popUpMenu").hide();
 $(".x").hide();
-$('.settingsArea').hide()
+
 
 
 
@@ -132,17 +132,12 @@ const piano1 = new Tone.Sampler({
 
 })
 
-// let flute1 = require('../static/flute 1.mp3');
 
 const flute = new Tone.Sampler({
   urls: {
-    // C6: flute1,
     C6: "flute 1.mp3",
     C5: "flute 2.mp3",
     C4: "flute 3.mp3",
-    // C4: audio.flute 3.mp3,
-
-    // A2: "A2.mp3",
   },
   baseUrl: "assets/",
 
@@ -316,21 +311,8 @@ setup();
 const audioButton = $("#audio-button");
 const audioButton2 = $("#audio-button2");
 
-let defaultPreset = {
-  name: "Ambient Stuff",
-  by: "Hamish Lang",
-  tone1: casioStrings,
-  tone1Type: "",
-  tone1Colors: ['rgba(189,218,183,0.7)', 'rgba(49,184,119,0.8)'],
-  tone2: flute,
-  color1: "Blue",
-  color2: "green",
-  sfxBird1: 0.4,
-  sfxBird2: 0.4,
-  sfxOcean: 0.5,
-  drone1: 0,
-  drone2: 0,
-};
+
+
 
 
 
@@ -475,14 +457,12 @@ $(".x").on("click", function () {
 )
 
 
-
-
 let bird1 = new Tone.Player("assets/birds1.mp3").toDestination();
 let ocean = new Tone.Player("assets/ocean.mp3").toDestination();
 
 
 
-function knobFunction(target, parent, type, toneName) {
+function knobFunction(target, parent, toneName) {
   toneName.autostart = true;
   toneName.volume.value = -100;
   toneName.loop = true;
@@ -508,16 +488,12 @@ function knobFunction(target, parent, type, toneName) {
       toneName.mute = true
       // toneName.stop()
       $(parent).css('background-color', 'rgba(211, 211, 211, 0.3)')
-
     }
-
-
-
   });
 }
 
-knobFunction("knob1", ".knob-container1", 'birds', bird1)
-knobFunction("knob2", ".knob-container2", 'ocean', ocean)
+knobFunction("birds", ".knob-container1", bird1)
+knobFunction("waves", ".knob-container2", ocean)
 
 Nexus.colors.accent = "royalblue"
 Nexus.colors.fill = "#fff"
@@ -555,17 +531,25 @@ cursorForBoxes(area1, cursor)
 cursorForBoxes(area2, cursor2)
 
 
-$('.settingsButton').toggle(function () {
-  $('.settingsArea').slideDown(200)
+$('.options').toggle(function () {
+  $('.setArea').slideDown(200)
   // noteCount = true;
 }, function () {
-  $('.settingsArea').slideUp(200)
+  $('.setArea').slideUp(200)
   $('.notes').slideUp(100);
   $('.keys').slideUp(100)
   // setTrue(noteCount, 0)
-
 })
 
+$('.presets').toggle(function () {
+  $('.presetsArea').slideDown(200)
+  // noteCount = true;
+}, function () {
+  $('.presetsArea').slideUp(200)
+  // $('.notes').slideUp(100);
+  // $('.keys').slideUp(100)
+  // setTrue(noteCount, 0)
+})
 
 let keyDisplay = (target, area) => {
   $( target ).click(function () {
@@ -615,7 +599,19 @@ if ($(`#c`).is(':checked') && $(`#major`).is(':checked')) {
 
 // delay.feedback.value = 0
 
+$('.test').on("click", function () {
+  console.log(
+  $("input[name='note']:checked").val(), 
+  $("input[name='key']:checked").val(), 
+  $("input[name='tone1']:checked").val(), 
+  $("input[name='tone2']:checked").val(), 
+  $("#waves").val(), 
+  $("#birds").val(), 
+  )
+  $("#knob1").val(50)
 
+
+})
 
 
 
@@ -624,7 +620,6 @@ if ($(`#c`).is(':checked') && $(`#major`).is(':checked')) {
 
 
 import * as database from './database';
-// import audio from '/assets/birds.mp3';
 
 
 const buildMessageRow = (messageItem) => {
@@ -632,13 +627,17 @@ const buildMessageRow = (messageItem) => {
 
   newMessageRow.setAttribute('id', messageItem.id);
   newMessageRow.innerHTML = `
-    <td>${messageItem.message}</td>
-    <td>${messageItem.votes}</td>
+    <td class="themessage">${messageItem.Name}</td>
+    <td class="voteCount">${messageItem.votes}</td>
     <td>
       <i class="material-icons upvote">thumb_up</i>
       <i class="material-icons downvote">thumb_down</i>
       <i class="material-icons delete">delete</i>
     </td>
+    <td class="load">
+    <div>LOAD</div>
+    </td>
+    
   `;
 
   // todo: consider using delegation for this instead
@@ -654,7 +653,14 @@ const buildMessageRow = (messageItem) => {
     await database.messages.delete(messageItem.id);
     renderList();
   });
+  newMessageRow.querySelector('.load').addEventListener('click', async () => {
+    // await database.messages
+    console.log(messageItem);
+    $(`#${messageItem.Tone1}`).prop("checked", true);
+    $(`#${messageItem.Tone2}`).prop("checked", true);
 
+    // renderList();
+  });
   return newMessageRow;
 };
 
@@ -686,6 +692,8 @@ const onLoadHandler = async () => {
 
     // lets wait for the new message to be created before we request to render the list
     await database.messages.create(newMessageInput.value);
+    // await database.Tone1.create($("input[name='tone1']:checked").val());
+    
 
     renderList();
 
