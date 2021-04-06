@@ -205,7 +205,7 @@ const piano1 = new Tone.Sampler({
     C3: "piano 4.mp3",
     // A2: "A2.mp3",
   },
-  baseUrl: "../assets/",
+  baseUrl: "/assets/",
 
 })
 
@@ -218,7 +218,7 @@ const flute = new Tone.Sampler({
 
     // A2: "A2.mp3",
   },
-  baseUrl: "../assets/",
+  baseUrl: "/assets/",
 
 })
 
@@ -230,7 +230,7 @@ const casioStrings = new Tone.Sampler({
     C3: "casio2 4.mp3",
     // A2: "A2.mp3",
   },
-  baseUrl: "../assets/",
+  baseUrl: "/assets/",
 
 })
 
@@ -242,7 +242,7 @@ const casio3 = new Tone.Sampler({
     C4: "casio3 4.mp3",
     // A2: "A2.mp3",
   },
-  baseUrl: "../assets/",
+  baseUrl: "/assets/",
 
 })
 
