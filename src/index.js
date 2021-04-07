@@ -629,7 +629,7 @@ const buildMessageRow = (messageItem) => {
   newMessageRow.innerHTML = `
     <td class="themessage">${messageItem.Name}</td>
     <td class="voteCount">${messageItem.votes}</td>
-    <td>
+    <td class="actions">
       <i class="material-icons upvote">thumb_up</i>
       <i class="material-icons downvote">thumb_down</i>
       <i class="material-icons delete">delete</i>

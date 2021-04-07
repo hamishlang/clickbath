@@ -9,6 +9,7 @@
 html {
     box-sizing: border-box;
     font-size: 62.5%;
+    overflow-y: scroll;
     /* background-color: #1c6fb3; */
 
 }
@@ -110,7 +111,6 @@ a {
     text-align: center;
     display: grid;
     overflow: hidden;
-
     max-width: 1060px;
     grid-template-areas:
 
@@ -320,16 +320,7 @@ a {
 
 }
 
-#newmessage {
-    width: 100px;
-    height: 30px;
-    display: inline-block;
-}
 
-#submit {
-    /* width: 300px; */
-    display: inline-block;
-}
 
 
 .settingsArea {
@@ -366,65 +357,148 @@ a {
 
 .presetsArea {
     overflow:visible;
-    padding: 20px;
     font-family: 'Nanum Myeongjo', serif;
     font-family: recolata;
     letter-spacing: -0.4px;
     user-select: none;
+    display: grid;
+    grid-template-areas:
+        'up . .';
+    grid-template-columns: 500px auto auto;
+    margin-bottom: 2em;
+    height: 300px;
+}
+
+
+
+/* USER PRESET TABLE STYLES */
+
+#newmessage {
+    width: 150px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 5px;
+    border: 2px solid rgba(68, 68, 173, 0.3);
+    padding: 5px;
+    font-family: recolata;
+}
+#newmessage:focus {
+    outline: none;
+    border: 2px solid rgba(68, 68, 173, 0.7);
+}
+
+#newmessage::placeholder {
+    color: lightgray;
+    
+}
+
+#submit {
+    /* width: 300px; */
+    display: inline-block;
+    font-family: recolata;
+    padding: 3px 8px;
+    border: 2px solid rgba(68, 68, 173, 0.3);
+    border-radius: 5px;
+}
+
+#submit span {
+    /* padding-bottom:5px; */
+    display:inline-block;
+    vertical-align: middle;
+
+}
+
+#submit i {
+    vertical-align: middle;
+}
+
+.messageSubmit {
+    padding: 5px;
+}
+
+.messageSubmit button {
+background-color: white;
 }
 
 .presetsArea tr {
-    height : 30px;
-    width: 30px;
-    border-spacing: 0px;
-    overflow: hidden;
-    text-overflow: ellipsis; 
+
+    border-bottom: 1px solid rgba(68, 68, 173, 0.3);
 }
 
 .presetsArea td {
-    /* display: inline=block;  */
-    /* height:  /40px; */
-    /* width: 130px; */
     border-spacing: 0px;
     overflow: hidden;
     text-overflow: ellipsis; 
-    border-bottom: 1px solid rgba(68, 68, 173, 0.714);
-    /* display: block; */
+    box-sizing: border-box;
+
+}
+
+table {
+    text-align: center;
+}
+
+thead {
+    width: 100%;
+    /* text-align: left; */
+    font-size: 11px;
+    color: grey;
+    text-transform: uppercase;
 }
 
 .voteCount td {
     width: 20px;
+    text-align: center;
+}
+
+.voteCount tr {
+    width: 20px;
+    text-align: center;
 }
 
 .themessage {
     display: block; 
     width: 170px;
     padding: 8px;
+    height: 38px;
+    box-sizing: content-box;
+    text-align: start;
 
 }
 
 
 
-.presetsArea tr:hover {
+tbody tr:hover {
     height: 30px;
     background-color: rgba(68, 68, 173, 0.05);
 }
 
+
+
 table {
     border-collapse: collapse;
+    background-color: white;
   }
 
 .presetsArea i {
     font-size: 20px;
     cursor: pointer;
-    color: rgba(68, 68, 173, 0.714);
+    color: rgba(68, 68, 173, 0.7);
+    margin-right: 3px;
     
 }
 
+.userPresetsHouse {
+    grid-area: up;
+    padding-left: 10px;
+    background-color:  #BDC1E1;
+}
+
 .userpresets {
-    height: 300px;
+    height: 220px;
     overflow-y : auto;
-    max-width: 390px;
+    width: 380px;
+    background-color: white;
+    border-radius: 8px;
     /* overflow-x: hidden; */
 }
 
@@ -449,13 +523,13 @@ body::-webkit-scrollbar {
   }
    
   .userpresets::-webkit-scrollbar-track {
- 
-    background-color: rgba(68, 68, 173, 0.1);
+    border-radius: 20px;
+    background-color: rgb(223, 247, 238);
   }
    
   .userpresets::-webkit-scrollbar-thumb {
-    background-color: rgba(68, 68, 173, 0.3);
-    
+    background-color: #9296b1;
+    z-index: 50;
     border-radius: 20px;
   }
 
@@ -476,7 +550,7 @@ body::-webkit-scrollbar {
 }
 
 .load div {
-    margin: 0px 20px 0px 20px;
+    margin: 0px 18px 0px 18px;
     color: rgba(0, 128, 0, 0.6);
     border: 1px solid rgba(0, 128, 0, 0.6);
     padding: 4px 10px;

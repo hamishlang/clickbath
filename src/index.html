@@ -30,7 +30,7 @@
 
   <div>
 
-    <div class="title">Click Bath W</div>
+    <div class="title">Click Bath</div>
     <div class="parentArea">
 
         <div class="area" id="audio-button" oncontextmenu="return false;">
@@ -264,22 +264,22 @@
     <div class="settingsButton presets">PRESETS<span class="arrow">&#9660</span></div>
     <div class="settingsArea presetsArea" style="display: none;"> 
         <!-- style="display: none;" -->
+        <div class="userPresetsHouse">
         <div class="messageSubmit">
           <form>
-            <div>
-              <div>
+
                 <!-- <textarea id="newmessage" class="materialize-textarea" style="height: 30px"></textarea> -->
                 <input id="newmessage" type="text" placeholder="Enter Tone Name"></input>
                 <!-- <label for="newmessage">Message</label> -->
-              </div>
-            </div>
-            <div>
-              <button class="btn waves-effect waves-light" type="submit" id="submit">Submit
-                <i class="material-icons right">send</i>
+
+            
+              <button class="btn waves-effect waves-light" type="submit" id="submit"> <span>SAVE</span> 
+                <i class="material-icons right">save</i>
               </button>
-            </div>
+            
           </form>
         </div>
+
       <div class="userPresets">
       <table>
         <thead>
@@ -287,12 +287,14 @@
               <th>Message</th>
               <th>Votes</th>
               <th>Actions</th>
+              <th>Load</th>
           </tr>
         </thead>
         <tbody id="message-container">
         </tbody>
       </table>
       </div>
+    </div>
     </div>
     
     
