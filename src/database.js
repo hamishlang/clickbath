@@ -21,7 +21,10 @@ export const messages = {
       Name,
       Tone1: $("input[name='tone1']:checked").val(), 
       Tone2: $("input[name='tone2']:checked").val(), 
-      votes: 0
+      votes: 0,
+      keyNote: $('.actualNote').text(),
+      keyScale: $('.actualKey').text(),
+      keyMood: $('.actualMood').text(),
     });
   },
   getAll: () => {

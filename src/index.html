@@ -5,14 +5,15 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.15/Tone.js"
     integrity="sha512-m484N6z1C3HX3bXWUGHXFoaHWgDZxhMebKemEYfEsyr4gUadYZkFp9lW/ZiP+QptN8NM16l3wRSNYDX24lqokg=="
     crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/nexusui@latest/dist/NexusUI.js"></script>
 
 
@@ -34,6 +35,7 @@
     <div class="parentArea">
 
         <div class="area" id="audio-button" oncontextmenu="return false;">
+            <div class="notification" style="display: none"></div>
             <div class="popup2"></div>
             <div class="popup"></div>
             <div class="cursor" style="display: none;"></div>
@@ -87,6 +89,7 @@
         </div>
         <div class="settingsHouse">
             <div class="settingsButton options">OPTIONS<span class="arrow">&#9660</span></div>
+            
             <div class="settingsArea setArea" style="display: none;">
                 <div class="set1">
                     <form action="/action_page.php">
@@ -126,7 +129,12 @@
                 </div>
                 <div class="space">
                     <div class="keySettings">
-                        <div class="selectedNote"> <span class="actualNote">C</span>   <span class="material-icons">
+                        
+                        <br>
+                        <div class="musicalKeyBox">
+                            <div class="keytypes">Musical</div>
+                            <div class="keyselectors">
+                        <div class="selectedNote"> <div class="actualNote">C</div>   <span class="material-icons">
                             unfold_more
                             </span></div>
                         <div class="notes" style="display: none">
@@ -198,9 +206,10 @@
                             </div>
                         </form>
                     </div>
-                    <div class="selectedKey"> <span class="actualKey">Major</span>   <span class="material-icons">
+                    
+                    <div class="selectedKey"> <div class="actualKey">Major</div>   <div class="material-icons">
                         unfold_more
-                        </span></div>
+                        </div></div>
                         <div class="keys" style="display: none">
                             <form action="#">
                                 <div class="container">
@@ -212,7 +221,40 @@
                                     <label class="formKey" for="minor">Minor
                                     <input class="formKey" type="radio" id="minor" name="key" value="minor">
                                     <span class="checkmark"></span></label>
-                                </div> </form></div>
+                                </div> </form></div></div>
+                            </div>
+
+                                <div class="or"> OR </div>
+                                <div class="musicalMoodBox">
+                                <div class="keytypes2 grey">Mood</div>
+                                <div class="selectedMood grey"> <div class="actualMood">---</div>   <div class="material-icons">
+                                    unfold_more
+                                    </div></div>
+                                    <div class="moods" style="display: none">
+                                        <form action="#">
+                                            <div class="container">
+                                                <label class="formKey" for="optimistic">Optimistic
+                                                <input class="formKey" type="radio" id="optimistic" name="mood" value="optimistic">
+                                                <span class="checkmark"></span></label>
+                                            </div>
+                                            <div class="container">
+                                                <label class="formKey" for="happy">Happy
+                                                <input class="formKey" type="radio" id="happy" name="mood" value="happy">
+                                                <span class="checkmark"></span></label>
+                                            </div> 
+                                            <div class="container">
+                                                <label class="formKey" for="mysterious">Mysterious
+                                                <input class="formKey" type="radio" id="mysterious" name="mood" value="optimistic">
+                                                <span class="checkmark"></span></label>
+                                            </div>
+                                            <div class="container">
+                                                <label class="formKey" for="melancholy">Melancholy
+                                                <input class="formKey" type="radio" id="melancholy" name="mood" value="optimistic">
+                                                <span class="checkmark"></span></label>
+                                            </div>
+                                        
+                                        </form></div></div>
+                                
                     </div>
 
                 </div>
@@ -255,10 +297,11 @@
             </div>
 
 
-        </div>
+        
 
 
     </div>
+</div>
 </div>
 <div class="presetsHouse">
     <div class="settingsButton presets">PRESETS<span class="arrow">&#9660</span></div>
@@ -310,7 +353,7 @@
 
 
 
-
+<button class="success">SUCCESS</button>
   <div>
     
   <!-- <button class="test">TEST MEEE</button> -->

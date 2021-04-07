@@ -1,5 +1,3 @@
-
-
 // CLICK BATH
 
 
@@ -15,31 +13,31 @@ Tone.Transport.bpm.value = 120;
 
 // this took so bloody long to get right. Basically these are different chords, for different scales in both major and minor
 
-let C   =   ['C','E','G','B',];
-let Cs    =  ['Db','F','Ab','C',];
-let D  =    ['D','F#','A','C#'];
-let Ds  =   ['Eb','G','Bb','D',];
-let E  =    ['E','G#','B','D#'];
-let F  =    ['F','A','C','E',];
-let Fs  =   ['F#','A#','C#','F',];
-let G  =    ['G','B','D','F#'];
-let Gs  =   ['Ab','C','Eb','G',];
-let A  =    ['A','C#','E','G#'];
-let As  =   ['Bb','D','F','A',];
-let B  =    ['B','D#','F#','A#',];
+let C = ['C', 'E', 'G', 'B', ];
+let Cs = ['Db', 'F', 'Ab', 'C', ];
+let D = ['D', 'F#', 'A', 'C#'];
+let Ds = ['Eb', 'G', 'Bb', 'D', ];
+let E = ['E', 'G#', 'B', 'D#'];
+let F = ['F', 'A', 'C', 'E', ];
+let Fs = ['F#', 'A#', 'C#', 'F', ];
+let G = ['G', 'B', 'D', 'F#'];
+let Gs = ['Ab', 'C', 'Eb', 'G', ];
+let A = ['A', 'C#', 'E', 'G#'];
+let As = ['Bb', 'D', 'F', 'A', ];
+let B = ['B', 'D#', 'F#', 'A#', ];
 
-let Cm   =   ['C','Eb','G','Bb',];
-let Csm    = ['C#','E','G#','B',];
-let Dm =     ['D','F','A','C',];
-let Dsm  =   ['D#','F#','A#','C#',];
-let Em =     ['E','G','B','D',];
-let Fm  =    ['F','Ab','C','Eb',];
-let Fsm  =   ['F#','A','C#','E',];
-let Gm  =    ['G','Bb','D','F',];
-let Gsm  =   ['G#','B','D#','F#',];
-let Am  =    ['A','C','E','G',];
-let Asm  =   ['A#','C#','F','G#',];
-let Bm  =    ['B','D','F#','A',];
+let Cm = ['C', 'Eb', 'G', 'Bb', ];
+let Csm = ['C#', 'E', 'G#', 'B', ];
+let Dm = ['D', 'F', 'A', 'C', ];
+let Dsm = ['D#', 'F#', 'A#', 'C#', ];
+let Em = ['E', 'G', 'B', 'D', ];
+let Fm = ['F', 'Ab', 'C', 'Eb', ];
+let Fsm = ['F#', 'A', 'C#', 'E', ];
+let Gm = ['G', 'Bb', 'D', 'F', ];
+let Gsm = ['G#', 'B', 'D#', 'F#', ];
+let Am = ['A', 'C', 'E', 'G', ];
+let Asm = ['A#', 'C#', 'F', 'G#', ];
+let Bm = ['B', 'D', 'F#', 'A', ];
 
 // Channels for delays
 
@@ -197,6 +195,13 @@ let noteArray = (octave) => {
   let notes = C
   delay.feedback.value = 0.8
   delay2.feedback.value = 0.8
+
+
+  if ($(`#optimistic`).is(':checked')) {
+    console.log("feeling nice")
+    notes = C
+  };
+
   if ($(`#c`).is(':checked')) {
     if ($(`#major`).is(':checked')) {
       notes = C
@@ -316,36 +321,32 @@ const audioButton2 = $("#audio-button2");
 
 
 
-function synthSetup(theButton, panName, targetTwo, number ) {
+function synthSetup(theButton, panName, targetTwo, number) {
   let synthName;
   theButton.on('click', (e) => {
     // if (theButton === audioButton) {
 
-      if ($(`#piano${number}`).is(':checked')) {
-        synthName = piano1;
-        // console.log(this)
-      } else if ($(`#sine${number}`).is(":checked")) {
-        synthName = synth2;
-      } 
-      else if ($(`#flute${number}`).is(":checked")) {
-        synthName = flute;
-      }
-      else if ($(`#casio${number}`).is(":checked")) {
-        synthName = casio3;
-      }
-      else if ($(`#strings${number}`).is(":checked")) {
-        synthName = casioStrings;
-      }
-      else if ($(`#synth${number}`).is(":checked")) {
-        synthName = synth2;
-      }
-      synthName.connect(panName)
+    if ($(`#piano${number}`).is(':checked')) {
+      synthName = piano1;
+      // console.log(this)
+    } else if ($(`#sine${number}`).is(":checked")) {
+      synthName = synth2;
+    } else if ($(`#flute${number}`).is(":checked")) {
+      synthName = flute;
+    } else if ($(`#casio${number}`).is(":checked")) {
+      synthName = casio3;
+    } else if ($(`#strings${number}`).is(":checked")) {
+      synthName = casioStrings;
+    } else if ($(`#synth${number}`).is(":checked")) {
+      synthName = synth2;
+    }
+    synthName.connect(panName)
     // }
-      // console.log(panName)
+    // console.log(panName)
 
-      
 
-      
+
+
     let rect = e.target.getBoundingClientRect();
     let x = e.clientX - rect.left; //x position within the element.
     let y = e.clientY - rect.top; //y position within the element.
@@ -531,87 +532,209 @@ cursorForBoxes(area1, cursor)
 cursorForBoxes(area2, cursor2)
 
 
-$('.options').toggle(function () {
-  $('.setArea').slideDown(200)
-  // noteCount = true;
-}, function () {
-  $('.setArea').slideUp(200)
-  $('.notes').slideUp(100);
-  $('.keys').slideUp(100)
-  // setTrue(noteCount, 0)
-})
+// $('.options').toggle(function () {
+//   $('.setArea').slideDown(200)
+//   // noteCount = true;
+// }, function () {
+//   $('.setArea').slideUp(200)
+//   $('.notes').slideUp(100);
+//   $('.keys').slideUp(100)
+//   // setTrue(noteCount, 0)
+// })
 
-$('.presets').toggle(function () {
-  $('.presetsArea').slideDown(200)
-  // noteCount = true;
-}, function () {
-  $('.presetsArea').slideUp(200)
-  // $('.notes').slideUp(100);
-  // $('.keys').slideUp(100)
-  // setTrue(noteCount, 0)
-})
+
+// $('.options').toggle(function () {
+//   $('.setArea').slideDown(200)
+//   // noteCount = true;
+// }, function () {
+//   $('.setArea').slideUp(200)
+//   $('.notes').slideUp(100);
+//   $('.keys').slideUp(100)
+//   // setTrue(noteCount, 0)
+// })
+
+// $('.presets').toggle(function () {
+//   $('.presetsArea').slideDown(200)
+//   // noteCount = true;
+// }, function () {
+//   $('.presetsArea').slideUp(200)
+//   // $('.notes').slideUp(100);
+//   // $('.keys').slideUp(100)
+//   // setTrue(noteCount, 0)
+// })
 
 let keyDisplay = (target, area) => {
-  $( target ).click(function () {
-    if ( $( area ).first().is( ":hidden" ) ) {
-      $( area ).fadeIn( 100 );
-    } else {
-      $( area ).hide();
+  $(target).click(function () {
+
+    if (target !== '.selectedMood') {
+      if ($(area).first().is(":hidden")) {
+        $('.moods').hide();
+        $(area).fadeIn(100);
+      } else {
+        $(area).hide();
+      }
+    }
+    if (target == '.selectedMood') {
+      if ($(area).first().is(":hidden")) {
+        console.log("working")
+        $('.notes').hide();
+        $('.keys').hide();
+        $(area).fadeIn(100);
+      } else {
+        $(area).hide();
+      }
     }
   });
 }
 
 keyDisplay('.selectedNote', '.notes')
 keyDisplay('.selectedKey', '.keys')
+keyDisplay('.selectedMood', '.moods')
 
-$('.keySettings').change(function() {
 
-// auto populate DIV with note when changed 
-// $('.notes').change(function() {
-    let setNoteValue = $("input[name='note']:checked").val();
-    if(setNoteValue){
-        $('.actualNote').text(setNoteValue);
-        $('.notes').slideUp(100)
-        delay.feedback.value = 0
-        delay2.feedback.value = 0
+let menuDisplay = (target, area) => {
+  $(target).click(function () {
+
+    if (target == '.options') {
+      if ($(area).first().is(":hidden")) {
         
+        $(area).slideDown(200);
+      } else {
+        $(area).slideUp(200);
+        $('.moods').hide();
+        $('.keys').hide();
+        $('.notes').hide();
+      }
     }
-  // })
-    $('.keys').change(function() {
-    let setKeyValue = $("input[name='key']:checked").val();
-    if(setKeyValue){
-        $('.actualKey').text(setKeyValue);
-        $('.keys').slideUp(100)
-
+    else {
+      if ($(area).first().is(":hidden")) {
+        console.log("working")
+        $('.notes').hide();
+        $('.keys').hide();
+        $(area).slideDown(200);
+      } else {
+        $(area).slideUp(200);
+      }
     }
-  })
+  });
+}
+
+menuDisplay('.options', '.setarea')
+menuDisplay('.presets', '.presetsArea')
+
+$('.keySettings').change(function () {
+
+  // auto populate DIV with note when changed 
+  // $('.notes').change(function() {
+  let setNoteValue = $("input[name='note']:checked").val();
+  let setKeyValue = $("input[name='key']:checked").val();
+  // let setMoodValue = $("input[name='mood']:checked").val();
+
+  if (setNoteValue) {
+
+    if ($("input[name='key']:checked") === undefined) {
+      console.log("no key!!")
+    }
+
+  }
+
+
+  if (setKeyValue) {
+    $('.actualKey').text(setKeyValue);
+    $('.keys').slideUp(100)
+
+  }
+
+});
+
+$('.notes').change(function () {
+  //turn off delays to avoid soundclashes
+  delay.feedback.value = 0;
+  delay2.feedback.value = 0;
+  let setNoteValue = $("input[name='note']:checked").val();
+  $('.notes').slideUp(100);
+  $('.actualNote').text(setNoteValue);
+
+  $('.actualMood').text("---");
+
+  $('.keytypes').removeClass("grey");
+  $('.selectedNote').removeClass("grey");
+  $('.selectedKey').removeClass("grey");
+
+
+  $('.keytypes2').addClass("grey");
+  $('.selectedMood').addClass("grey");
+
+
+  $("input[name='mood']:checked").removeAttr('checked')
+
+  //check if a key has been selected, if not, select major by default
+  if ($("input[name='key']:checked").val() == undefined) {
+    console.log("no key!!")
+    $("#major").prop("checked", true);
+    $('.actualKey').text("Major")
+  }
+});
 
 
 
+function setDaKey() {
+  $('.actualMood').text("---");
 
-if ($(`#c`).is(':checked') && $(`#major`).is(':checked')) {
-  console.log("C Major")
+  $('.keytypes').removeClass("grey");
+  $('.selectedNote').removeClass("grey");
+  $('.selectedKey').removeClass("grey");
+
+
+  $('.keytypes2').addClass("grey");
+  $('.selectedMood').addClass("grey");
+  $("input[name='mood']:checked").removeAttr('checked')
 }
 
 
-})
+$('.keys').change(function () {
+  //turn off delays to avoid soundclashes
+  delay.feedback.value = 0;
+  delay2.feedback.value = 0;
+  let setKeyValue = $("input[name='key']:checked").val();
+  $('.keys').slideUp(100);
+  $('.actualKey').text(setKeyValue);
+
+setDaKey();
+
+  //check if a key has been selected, if not, select major by default
+  if ($("input[name='note']:checked").val() == undefined) {
+    console.log("no note!!")
+    $("#c").prop("checked", true);
+    $('.actualNote').text("C")
+  }
+});
 
 
-// delay.feedback.value = 0
+//welcome to JQUERY HELLLLL
+function setDaMood() {
+  $("input[name='note']:checked").removeAttr('checked')
+  $("input[name='key']:checked").removeAttr('checked')
+  $('.actualNote').text("---");
+  $('.actualKey').text("---");
+  $('.keytypes').addClass("grey");
+  $('.selectedNote').addClass("grey");
+  $('.selectedKey').addClass("grey");
+  $('.keytypes2').removeClass("grey");
+  $('.selectedMood').removeClass("grey");
+}
 
-$('.test').on("click", function () {
-  console.log(
-  $("input[name='note']:checked").val(), 
-  $("input[name='key']:checked").val(), 
-  $("input[name='tone1']:checked").val(), 
-  $("input[name='tone2']:checked").val(), 
-  $("#waves").val(), 
-  $("#birds").val(), 
-  )
-  $("#knob1").val(50)
 
 
-})
+
+
+$('.moods').change(function () {
+  let setMoodValue = $("input[name='mood']:checked").val();
+  setDaMood();
+
+  $('.actualMood').text(setMoodValue);
+  $('.moods').slideUp(100);
+});
 
 
 
@@ -658,7 +781,22 @@ const buildMessageRow = (messageItem) => {
     console.log(messageItem);
     $(`#${messageItem.Tone1}`).prop("checked", true);
     $(`#${messageItem.Tone2}`).prop("checked", true);
-
+    if (messageItem.keyMood !== "---") {
+      console.log("it's a mood key")
+      $(`#${messageItem.keyMood}`).prop("checked, true")
+      setDaMood()
+      $('.actualMood').text(messageItem.keyMood)
+      
+    } if (messageItem.keyNote !== "---") {
+      console.log("it's a musical key")
+      $(`#${messageItem.keyNote}`).prop("checked", true)
+      $(`#${messageItem.keyScale}`).prop("checked", true)
+      setDaKey()
+      $('.actualNote').text(messageItem.keyNote)
+      $('.actualKey').text(messageItem.keyScale)
+     
+    }
+    notification(`${messageItem.Name} loaded`)
     // renderList();
   });
   return newMessageRow;
@@ -669,7 +807,7 @@ const renderList = async () => {
 
   // get latest messages
   const messages = await database.messages.getAll();
-  
+
   // reset list container to empty
   listContainer.innerHTML = '';
 
@@ -693,7 +831,7 @@ const onLoadHandler = async () => {
     // lets wait for the new message to be created before we request to render the list
     await database.messages.create(newMessageInput.value);
     // await database.Tone1.create($("input[name='tone1']:checked").val());
-    
+
 
     renderList();
 
@@ -708,3 +846,15 @@ if (document.readyState === 'loading') {
   onLoadHandler();
 }
 
+
+
+function notification(message) {
+
+$('.notification').text(message)
+$('.notification').fadeIn(100).delay(800)
+$('.notification').fadeOut(1200)
+
+}
+
+
+$('.success').on("click", function () {notification("Scale Changed")})
