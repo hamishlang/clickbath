@@ -23,12 +23,12 @@ a {
 
 @font-face {
     font-family: recolata;
-    src: url(../static/recolata.otf);
+    src: url(/recolata.d3464597.otf);
 }
 
 @font-face {
     font-family: Salvaje;
-    src: url(../static/Salvaje.otf);
+    src: url(/Salvaje.6efa5d50.otf);
 }
 
 .title {
@@ -1228,3 +1228,5 @@ transition: letter-spacing .2s;
     color: lightgrey;
     z-index: -500;
 }
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */

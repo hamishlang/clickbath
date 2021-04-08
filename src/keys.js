@@ -11,7 +11,3 @@ export const weatherKey = {
   apiKey: process.env.WEATHER_KEY
 };
 
-// export const weatherKey2 = {
-// apiKey:d52cf576f49bbd4298f4f4f42033b08e
-
-// } 

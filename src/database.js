@@ -5,8 +5,7 @@ import { firebaseKeys } from './keys';
 import { weatherKey } from './keys';
 
 export const weatherCall = weatherKey;
-// console.log(weatherKey)
-// console.log(weatherCall)
+
 
 firebase.initializeApp(firebaseKeys);
 

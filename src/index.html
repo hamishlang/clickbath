@@ -35,6 +35,7 @@
     <div class="parentArea">
 
         <div class="area" id="audio-button" oncontextmenu="return false;">
+            <div class="gradient1" style="display: none;"></div>
             <div class="notification" style="display: none"></div>
             <div class="popup2"></div>
             <div class="popup"></div>
@@ -64,7 +65,7 @@
         </div>
 
         <div class="allKnobs">
-            <div class="hiddenKnobs">
+            <div class="hiddenKnobs" style="display: none;">
             <span>BIRDS 1
                 <div class="knob knob-container1">
                     <webaudio-knob id="birds" class="knob1" src="assets/knob2.png" width="50" height="50">
@@ -139,9 +140,13 @@
             
             <div class="settingsArea setArea" style="display: none;">
                 <div class="set1">
-                    <form action="/action_page.php">
-                        <p>Please select your 1st Tone:</p>
-                       
+                    
+                        <div class="presetTitle">TONE 1 OPTIONS</div>
+                        
+                       <div class="toneHouses">
+                        <form action="#">
+                           <div class="toneLeft">
+                            
                         <div class="container">
                             <label class="form1" for="sine1">Sine
                             <input class="form1" type="radio" id="sine1" name="tone1" value="sine1" checked="true">
@@ -172,13 +177,55 @@
                             <input class="form1" type="radio" id="flute1" name="tone1" value="flute1">
                             <span class="checkmark"></span></label>
                         </div>
-                    </form>
+                    </div>
+                    <div class="toneLeft">
+                        <div class="container">
+                            <label class="form1" for="guitar1">Guitar
+                            <input class="form1" type="radio" id="guitar1" name="tone1" value="guitar1">
+                            
+                            <span class="checkmark"></span></label>
+                        </div>
+
+                        <div class="container">
+                            <label class="form1" for="strings21">Strings 2
+                            <input class="form1" type="radio" id="strings21" name="tone1" value="strings21">
+                            <span class="checkmark"></span></label>
+                        </div>
+
+
+                        <div class="container">
+                            <label class="form1" for="clarinet1">Clarinet
+                            <input class="form1" type="radio" id="clarinet1" name="tone1" value="clarinet1">
+                            <span class="checkmark"></span></label>
+
+                        </div>
+                        <div class="container">
+                            <label class="form1" for="tapebells1">Tape Bells
+                            <input class="form1" type="radio" id="tapebells1" name="tone1" value="tapebells1">
+                            <span class="checkmark"></span></label>
+                        </div>
+                        <div class="container">
+                            <label class="form1" for="tapeguitar1">Tape Guitar
+                            <input class="form1" type="radio" id="tapeguitar1" name="tone1" value="tapeguitar1">
+                            <span class="checkmark"></span></label>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </form>
+                    </div>
+                    
                 </div>
                 <div class="space">
                     <div class="keySettings">
-                        
+                        <div class="or scale"> SCALE </div>
                         <br>
                         <div class="musicalKeyBox">
+                            
                             <div class="keytypes">Musical</div>
                             <div class="keyselectors">
                         <div class="selectedNote"> <div class="actualNote">C</div>   <span class="material-icons">
@@ -306,13 +353,16 @@
 
                 </div>
                 <div class="set2">
-                    <form action="#">
-                        <p>Please select your 2nd Tone:</p>
-                        
-                        <div class="container">
+                    
+                        <div class="presetTitle">TONE 2 OPTIONS</div>
+                        <div class="toneHouses">
+                            <form action="#">
+                           <div class="toneLeft">
                             
-                            <label class="form2" for="synth2">Sine
-                            <input class="form2" type="radio" id="synth2" name="tone2" value="synth2">
+                        <div class="container">
+                            <!-- was synth2 -->
+                            <label class="form2" for="sine2">Sine
+                            <input class="form2" type="radio" id="sine2" name="tone2" value="sine2">
                             <span class="checkmark"></span></label>
                         </div>
 
@@ -339,7 +389,48 @@
                             <input class="form2" type="radio" id="flute2" name="tone2" value="flute2">
                             <span class="checkmark"></span></label>
                         </div>
-                    </form>
+                    </div>
+                        <div class="toneLeft">
+
+                            <div class="container">
+                                <label class="form2" for="guitar2">Guitar
+                                <input class="form2" type="radio" id="guitar2" name="tone2" value="guitar2">
+                                
+                                <span class="checkmark"></span></label>
+                            </div>
+    
+                            <div class="container">
+                                <label class="form2" for="strings22">Strings 2
+                                <input class="form2" type="radio" id="strings22" name="tone2" value="strings22">
+                                <span class="checkmark"></span></label>
+                            </div>
+    
+    
+                            <div class="container">
+                                <label class="form2" for="clarinet2">Clarinet
+                                <input class="form2" type="radio" id="clarinet2" name="tone2" value="clarinet2">
+                                <span class="checkmark"></span></label>
+    
+                            </div>
+                            <div class="container">
+                                <label class="form2" for="tapebells2">Tape Bells
+                                <input class="form2" type="radio" id="tapebells2" name="tone2" value="tapebells2">
+                                <span class="checkmark"></span></label>
+                            </div>
+                            <div class="container">
+                                <label class="form2" for="tapeguitar2">Tape Guitar
+                                <input class="form2" type="radio" id="tapeguitar2" name="tone2" value="tapeguitar2">
+                                <span class="checkmark"></span></label>
+                            </div>
+
+
+
+
+                        </div>
+                
+                
+            </form>
+            </div>
                 </div>
             </div>
 
@@ -425,8 +516,8 @@
 
 <!-- <button class="success">SUCCESS</button> -->
   <div>
-    
-  <button class="test">TEST MEEE</button>
+    <footer id="footer"><span style="font-family:'poppins'">©</span> Hamish Lang 2021</footer>
+  <!-- <button class="test">TEST MEEE</button> -->
   <!-- js -->
   <script src="./index.js"></script>
   <script src="https://g200kg.github.io/webaudio-controls/webaudio-controls.js"></script>

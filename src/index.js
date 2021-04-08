@@ -7,8 +7,6 @@ $(".x").hide();
 
 
 
-
-
 Tone.Transport.bpm.value = 120;
 
 // this took so bloody long to get right. Basically these are different chords, for different scales in both major and minor
@@ -159,11 +157,60 @@ const casio3 = new Tone.Sampler({
     C6: "casio3 2.mp3",
     C5: "casio3 3.mp3",
     C4: "casio3 4.mp3",
-    // A2: "A2.mp3",
   },
   baseUrl: "assets/",
 
 })
+
+const clarinet = new Tone.Sampler({
+  urls: {
+    C6: "clarinet3.mp3",
+    C5: "clarinet2.mp3",
+    C4: "clarinet1.mp3",
+  },
+  baseUrl: "assets/",
+})
+
+const strings2 = new Tone.Sampler({
+  urls: {
+    C6: "strings2-4.mp3",
+    C5: "strings2-3.mp3",
+    C4: "strings2-2.mp3",
+    C3: "strings2-1.mp3",
+  },
+  baseUrl: "assets/",
+})
+
+const tapebells = new Tone.Sampler({
+  urls: {
+    C6: "tapebell4.mp3",
+    C5: "tapebell3.mp3",
+    C4: "tapebell2.mp3",
+    C3: "tapebell1.mp3",
+  },
+  baseUrl: "assets/",
+})
+
+const tapeguitar = new Tone.Sampler({
+  urls: {
+    C5: "tapeguitar3.mp3",
+    C4: "tapeguitar2.mp3",
+    C3: "tapeguitar1.mp3",
+    // C3: "tapeguitar1.mp3",
+  },
+  baseUrl: "assets/",
+})
+
+const guitar = new Tone.Sampler({
+  urls: {
+    C5: "guitar3.mp3",
+    C4: "guitar2.mp3",
+    C3: "guitar1.mp3",
+    // C3: "tapeguitar1.mp3",
+  },
+  baseUrl: "assets/",
+})
+
 
 let synth2 = new Tone.Synth({
   "oscillator": {
@@ -206,9 +253,6 @@ let noteArray = (octave) => {
     console.log("feeling weird")
     notes = ['C', 'D', 'Eb', 'G', ];
   };
-
-
-
 
   if ($(`#c`).is(':checked')) {
     if ($(`#major`).is(':checked')) {
@@ -345,9 +389,17 @@ function synthSetup(theButton, panName, targetTwo, number) {
       synthName = casio3;
     } else if ($(`#strings${number}`).is(":checked")) {
       synthName = casioStrings;
-    } else if ($(`#synth${number}`).is(":checked")) {
-      synthName = synth2;
-    }
+    } else if ($(`#guitar${number}`).is(":checked")) {
+      synthName = guitar;
+    } else if ($(`#strings2${number}`).is(":checked")) {
+      synthName = strings2;
+    } else if ($(`#clarinet${number}`).is(":checked")) {
+      synthName = clarinet;
+    } else if ($(`#tapebells${number}`).is(":checked")) {
+      synthName = tapebells;
+    } else if ($(`#tapeguitar${number}`).is(":checked")) {
+      synthName = tapeguitar;
+    } 
     synthName.connect(panName)
     // }
     // console.log(panName)
@@ -371,11 +423,6 @@ function synthSetup(theButton, panName, targetTwo, number) {
     $(targetTwo).css(
       'background', 'radial-gradient(at ' + gradientPercX + '% ' + gradientPercY + '%, rgba(255, 255, 255, 0.5)0%, rgba(101,141,210,0.0) 41%)');
 
-    // $(theButton).css(
-    //   'background', 'linear-gradient(180deg, '+ colors[0] +'70%, '+ colors[1] +'100%)');
-
-    // use the pan value and allocate it to the panner
-    panName.pan.value = xPanWidth;
     console.log(octaveClick)
     synthName.triggerAttackRelease(noteArray(octaveClick), '1n');
   });
@@ -424,39 +471,6 @@ popupMaker(".area", ".areaShow")
 popupMaker(".area2", ".areaShow2")
 
 
-
-
-
-// $('.area').mousedown(function (e) {
-//   switch (e.which) {
-//     case 1:
-//       // console.log('Left Mouse button pressed.');
-//       // $(".popUpMenu").hide();
-//       // $(".x").hide();
-//       break;
-//     case 2:
-//       console.log('Middle Mouse button pressed.');
-//       break;
-//     case 3:
-//       $(".popUpMenu").show();
-//       $(".x").show();
-//       $(".popUpMenu").css({
-//         left: e.pageX
-//       });
-//       $(".popUpMenu").css({
-//         top: e.pageY
-//       });
-//       $(".x").css({
-//         left: e.pageX
-//       });
-//       $(".x").css({
-//         top: e.pageY
-//       });
-//       break;
-//     default:
-//       return;
-//   }
-// });
 
 $(".x").on("click", function () {
     $(".popUpMenu").hide();
@@ -675,29 +689,46 @@ function setDaKey() {
   $('.selectedMood').addClass("grey");
   $("input[name='mood']:checked").removeAttr('checked')
 }
-
+//small function due to the repeated use of it in the larger function for changing gradients based on which tone is checked. This was the best way I could find to animate gradient changes, simply ensure there is a base black and white one which is always persistent, then add an additional div on top. 
 function gradientFades(side, css) {
-  $(side).fadeOut(50);
+  // $(side).fadeOut(400);
+  $(side).hide();
   $(side).css(css);
   $(side).fadeIn("slow");
 };
 
-function gradientChanger(side) {
-  if($("input[name='tone2']:checked").val() === 'strings2' ||$("input[name='tone1']:checked").val() === 'strings1') {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 212, 255, 0.3) 0%, rgba(68, 68, 173, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"} );
+//here is the larger function, this checks which tone is selected then changes it accordingly, tried to make this as small as possible by 
+function gradientChanger(side,number) {
+  if($(`input[name='tone${number}']:checked`).val() === `strings${number}`) {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(255,250,170,0.41) 0%, rgba(245,230,59,0.45) 50%, rgba(80,159,203,1) 100%)"} );
   } 
-  else if($("input[name='tone2']:checked").val() === 'flute2' || $("input[name='tone1']:checked").val() === 'flute1') {
+  else if($(`input[name='tone${number}']:checked`).val() === `flute${number}`) {
     gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
   }
-  else if($("input[name='tone2']:checked").val() === 'flute2' || $("input[name='tone1']:checked").val() === 'flute1') {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
+  else if($(`input[name='tone${number}']:checked`).val() === `piano${number}`)  {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(249,231,170,0.6) 0%, rgba(245,86,59,0.4) 50%, rgba(101,141,210,1) 100%)"});
   }
-  else if($("input[name='tone2']:checked").val() === 'flute2' || $("input[name='tone1']:checked").val() === 'flute1') {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
+  else if($(`input[name='tone${number}']:checked`).val() === `sine${number}`)   {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(170,229,249,1) 0%, rgba(59,203,245,0.4) 50%, rgba(101,141,210,1) 100%)"});
   }
-  else if($("input[name='tone2']:checked").val() === 'flute2' || $("input[name='tone1']:checked").val() === 'flute1') {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
+  else if($(`input[name='tone${number}']:checked`).val() === `casio${number}`)  {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(248,205,250,0.1) 0%, rgba(199,59,245,0.3) 50%, rgba(101,141,210,1) 100%)"});
+  }
+  else if($(`input[name='tone${number}']:checked`).val() === `guitar${number}`)  {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(255,215,92,0.5) 0%, rgba(223,146,83,0.45) 50%, rgba(80,159,203,1) 100%)"});
   }  
+  else if($(`input[name='tone${number}']:checked`).val() === `strings2${number}`)  {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 212, 255, 0.3) 0%, rgba(68, 68, 173, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
+  }  
+  else if($(`input[name='tone${number}']:checked`).val() === `clarinet${number}`)  {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(234,255,244,1) 0%, rgba(83,223,182,0.45) 50%, rgba(80,159,203,1) 100%)"});
+  }  
+  else if($(`input[name='tone${number}']:checked`).val() === `tapebells${number}`)  {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(239,255,247,0.81) 0%, rgba(59,216,245,0.45) 50%, rgba(72,125,150,1) 100%)"});
+  }  
+  else if($(`input[name='tone${number}']:checked`).val() === `tapeguitar${number}`)  {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(255,221,170,0.3) 0%, rgba(245,96,59,0.4) 50%, rgba(80,159,203,1) 100%)"});
+  }    
   else {
     $(side).fadeOut("slow")
   }
@@ -705,23 +736,16 @@ function gradientChanger(side) {
 
 }
 
-function thingsChange(target) {
+function thingsChange(target, gradientMask, number) {
 $(target).change(function (e) { 
-
-  gradientChanger(".gradient2")
-  
-  
- 
-
-
-
+  gradientChanger(gradientMask, number)
+  // gradientChanger(gradientMask, number)
   showWeatherNotActive();
 })
 }
 
-thingsChange('.set1')
-thingsChange('.set2')
-
+thingsChange('.set1', ".gradient1", 1)
+thingsChange('.set2', ".gradient2", 2)
 
 
 $('.keys').change(function () {
@@ -818,6 +842,8 @@ const buildMessageRow = (messageItem) => {
       $(`#${messageItem.keyMood}`).prop("checked, true")
       setDaMood();
       showWeatherNotActive();
+      gradientChanger(".gradient1", 1);
+      gradientChanger(".gradient2", 2);
       $('.actualMood').text(messageItem.keyMood)
 
     }
@@ -827,6 +853,8 @@ const buildMessageRow = (messageItem) => {
       $(`#${messageItem.keyScale}`).prop("checked", true)
       setDaKey()
       showWeatherNotActive();
+      gradientChanger(".gradient1", 1);
+      gradientChanger(".gradient2", 2);
       $('.actualNote').text(messageItem.keyNote);
       $('.actualKey').text(messageItem.keyScale);
     }
@@ -856,6 +884,10 @@ const renderList = async () => {
 const onLoadHandler = async () => {
   // initial render of list
   await renderList();
+// So good putting the gradient changes here, means the browser gently loads in the shades once finished looading 
+  gradientChanger(".gradient1", 1);
+  gradientChanger(".gradient2", 2);
+  $('.hiddenKnobs').delay(800).slideDown(700);
 
   document.getElementById('submit').addEventListener('click', async (evt) => {
     evt.preventDefault();
@@ -939,6 +971,8 @@ const getWeather = function (lat, lon) {
       notification("Weather Loaded");
       $('#weatherState').removeClass("loading")
       weatherTones(json.current.weather[0].main);
+      gradientChanger(".gradient1", 1);
+      gradientChanger(".gradient2", 2);
       setDaKey();
       $('.weatherImage').empty()
       $('.weatherRight').append(`
@@ -1023,14 +1057,5 @@ function showPosition(position) {
 
 }
 
-$('.test').on("click", function() {
-  if ($('.gradient2').first().is(":hidden")) {
-  
-  $(".gradient2").fadeIn("slow"); }
-  else {
-    $(".gradient2").fadeOut("slow");
-  }
-    
 
-})
 
