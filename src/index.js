@@ -371,7 +371,7 @@ function synthSetup(theButton, panName, targetTwo, number) {
     // if (theButton === audioButton) {
 
     if ($(`#piano${number}`).is(':checked')) {
-      synthName = piano1;
+      synthName = piano1;""
       // console.log(this)
     } else if ($(`#sine${number}`).is(":checked")) {
       synthName = synth2;
