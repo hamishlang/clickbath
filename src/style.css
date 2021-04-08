@@ -331,7 +331,8 @@ background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109
     margin: 10px auto;
     border-radius: 14px;
     transition: box-shadow .2s;
-
+    font-family: 'poppins';
+    font-weight: 200;
     position: relative;
 }
 
@@ -345,12 +346,8 @@ background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109
     vertical-align:middle;
     display: inline-block;
     padding: 5.5px;
-    /* padding-top: 10px; */
-    /* transform: translate(0px, -1px); */
     position: inherit;
     
-    /* trans */
-    /* transition: transform .5s; */
 }
 
 .settingsButton:active {
@@ -417,7 +414,7 @@ background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109
     grid-template-areas:
         'up . wea';
     grid-template-columns: 500px 60px auto;
-    margin-bottom: 2em;
+    margin-bottom: 20em;
     height: 300px;
 }
 
@@ -705,6 +702,13 @@ border-left: none;
 border-right: none;
 letter-spacing: 0px;
 transition: letter-spacing .2s;
+font-family: 'poppins';
+font-weight: 200;
+}
+
+.set2 .presetTitle,
+.set1 .presetTitle {
+    margin-top: 0px;
 }
 
 .weatherHouse:hover .presetTitle {
@@ -910,14 +914,16 @@ transition: letter-spacing .2s;
     color: #888888;
     border-top: 1px solid rgb(228, 228, 228);
     border-bottom: 1px solid rgb(233, 233, 233);
+    font-family: 'poppins';
+    font-weight: 200;
    
 }
 
 .scale {
     margin-bottom: 0;
     color: #494949;
-    border-top: 1px solid rgb(201, 201, 201);
-    border-bottom: 1px solid rgb(201, 201, 201);
+    border-top: 1px solid rgba(201, 201, 201, 0.4);
+    border-bottom: 1px solid rgba(201, 201, 201,0.4);
 }
 
 /* SETTINGS CHECKBOX */
@@ -1199,9 +1205,10 @@ transition: letter-spacing .2s;
     display: block;
     width: 50px;
     margin: 0 auto;
-    color: rgb(150, 150, 150);
+    color: rgb(187, 187, 187);
     padding: 0 5px;
     transition: all .2s;
+    font-family: 'poppins';
 }
 .effects:active {
     background-color: rgba(68, 68, 173, 0.8);
@@ -1213,8 +1220,8 @@ transition: letter-spacing .2s;
 .effects:hover {
     background-color: rgba(68, 68, 173, 0.8);
     color: white;
-    font-size: 10px;
-    width: 60px;
+    /* font-size: 10px; */
+    width: 54px;
 }
 
 #footer {

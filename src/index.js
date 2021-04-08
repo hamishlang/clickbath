@@ -3,14 +3,13 @@
 
 $(".areaShow").hide();
 $(".popUpMenu").hide();
-$(".x").hide();
 
 
 
+//set the tempo for tone js
 Tone.Transport.bpm.value = 120;
 
 // this took so bloody long to get right. Basically these are different chords, for different scales in both major and minor
-
 let C = ['C', 'E', 'G', 'B', ];
 let Cs = ['Db', 'F', 'Ab', 'C', ];
 let D = ['D', 'F#', 'A', 'C#'];
@@ -37,17 +36,15 @@ let Am = ['A', 'C', 'E', 'G', ];
 let Asm = ['A#', 'C#', 'F', 'G#', ];
 let Bm = ['B', 'D', 'F#', 'A', ];
 
-// Channels for delays
-
+// Channels for delays, these are used later to establish the delay on the sound
 let delay;
 let delay2;
 let volume;
 let ready;
+
 let merge = new Tone.Channel();
 let merge2 = new Tone.Channel();
-
 let panner = new Tone.Panner();
-// panner.pan.setValueAtTime(-1, 0.25);
 let pannerTwo = new Tone.Panner();
 
 
@@ -80,8 +77,6 @@ async function setup() {
   pannerTwo.connect(delay2);
   delay2.connect(reverb2);
 
-  // merge.connect(reverb)
-  // merge2.connect(reverb)
   reverb.connect(Tone.Master);
   reverb2.connect(Tone.Master);
 
@@ -92,8 +87,8 @@ async function setup() {
   ready = true;
 }
 
-
-const synth = new Tone.PolySynth()
+// the following block is for setting up the synths and samplers
+const synth = new Tone.PolySynth();
 
 synth.set({
   "volume": 0,
@@ -114,7 +109,7 @@ synth.set({
     "phase": 0,
     "type": "sine"
   }
-})
+});
 
 const piano1 = new Tone.Sampler({
   urls: {
@@ -126,7 +121,7 @@ const piano1 = new Tone.Sampler({
   },
   baseUrl: "assets/",
 
-})
+});
 
 
 const flute = new Tone.Sampler({
@@ -137,7 +132,7 @@ const flute = new Tone.Sampler({
   },
   baseUrl: "assets/",
 
-})
+});
 
 const casioStrings = new Tone.Sampler({
   urls: {
@@ -145,11 +140,10 @@ const casioStrings = new Tone.Sampler({
     C5: "casio2 2.mp3",
     C4: "casio2 3.mp3",
     C3: "casio2 4.mp3",
-    // A2: "A2.mp3",
   },
   baseUrl: "assets/",
 
-})
+});
 
 const casio3 = new Tone.Sampler({
   urls: {
@@ -160,7 +154,7 @@ const casio3 = new Tone.Sampler({
   },
   baseUrl: "assets/",
 
-})
+});
 
 const clarinet = new Tone.Sampler({
   urls: {
@@ -169,7 +163,7 @@ const clarinet = new Tone.Sampler({
     C4: "clarinet1.mp3",
   },
   baseUrl: "assets/",
-})
+});
 
 const strings2 = new Tone.Sampler({
   urls: {
@@ -179,7 +173,7 @@ const strings2 = new Tone.Sampler({
     C3: "strings2-1.mp3",
   },
   baseUrl: "assets/",
-})
+});
 
 const tapebells = new Tone.Sampler({
   urls: {
@@ -189,32 +183,29 @@ const tapebells = new Tone.Sampler({
     C3: "tapebell1.mp3",
   },
   baseUrl: "assets/",
-})
+});
 
 const tapeguitar = new Tone.Sampler({
   urls: {
     C5: "tapeguitar3.mp3",
     C4: "tapeguitar2.mp3",
     C3: "tapeguitar1.mp3",
-    // C3: "tapeguitar1.mp3",
   },
   baseUrl: "assets/",
-})
+});
 
 const guitar = new Tone.Sampler({
   urls: {
     C5: "guitar3.mp3",
     C4: "guitar2.mp3",
     C3: "guitar1.mp3",
-    // C3: "tapeguitar1.mp3",
   },
   baseUrl: "assets/",
-})
+});
 
 
 let synth2 = new Tone.Synth({
   "oscillator": {
-    // We prefix 'fat' so we can spread the oscillator over multiple frequencies
     "type": `sine2`,
     "count": 30,
     "spread": 30
@@ -226,7 +217,10 @@ let synth2 = new Tone.Synth({
     "release": 1.5,
     "attackCurve": "exponential"
   }
-})
+});
+
+
+//set the volume for the noises
 piano1.volume.value = 8;
 flute.volume.value = 6;
 casioStrings.volume.value = 15;
@@ -234,16 +228,16 @@ casio3.volume.value = 15;
 synth.volume.value = -15;
 synth2.volume.value = -13;
 
-// const reverb = new Tone.Reverb(10)
-
-// let noteArray = ['C5','Eb3','Gb4','Bb4','C4','Eb4','Gb4',]
+//this function is used to establish what notes to use, basically it checks the current checkmark boxes to find out what notes should be played by using if statements
 let noteArray = (octave) => {
   // defaults to c major, same as check marks
   let notes = C
-  delay.feedback.value = 0.8
-  delay2.feedback.value = 0.8
 
+  //re-establish the delay level as some other funcitions kill it so that note clashes do not occur
+  delay.feedback.value = 0.8;
+  delay2.feedback.value = 0.8;
 
+  // here are a;; teh checkmarks
   if ($(`#optimistic`).is(':checked')) {
     console.log("feeling nice")
     notes = C
@@ -280,6 +274,13 @@ let noteArray = (octave) => {
       notes = Ds
     } else {
       notes = Dsm
+    };
+  };
+  if ($(`#e`).is(':checked')) {
+    if ($(`#major`).is(':checked')) {
+      notes = Es
+    } else {
+      notes = Esm
     };
   };
   if ($(`#e`).is(':checked')) {
@@ -340,31 +341,20 @@ let noteArray = (octave) => {
   };
   if ($(`#cs`).is(':checked') && $(`#major`).is(':checked')) {
     notes = Cs
-  }
-  // let notes = ['C', 'D', 'E', 'F', 'G', 'B']
+  };
 
+  // this simply ensures that the user is cycling through the array of notes defined earlier randomly
   function randomNote() {
     return Math.floor(Math.random() * notes.length)
-  }
-
+  };
   return `${notes[randomNote()]}${octave}`
-
-}
-// let noteArray = (octave) => { return ['C5', 'E5', 'G5', 'B5', 'C4', 'E4', 'G4', ] }
-noteArray;
-
-
-let randomArray = () => {
-  return Math.floor(Math.random() * 4)
-}
+};
 
 
 //this establishes all of the effect routing
 setup();
 
-
-
-
+//defining the actual areas as buttons for ease of use
 const audioButton = $("#audio-button");
 const audioButton2 = $("#audio-button2");
 
@@ -372,7 +362,7 @@ const audioButton2 = $("#audio-button2");
 
 
 
-
+// this is similar to the last functions used for keys except for the actual tones (instruments)
 function synthSetup(theButton, panName, targetTwo, number) {
   let synthName;
   theButton.on('click', (e) => {
@@ -399,90 +389,64 @@ function synthSetup(theButton, panName, targetTwo, number) {
       synthName = tapebells;
     } else if ($(`#tapeguitar${number}`).is(":checked")) {
       synthName = tapeguitar;
-    } 
-    synthName.connect(panName)
-    // }
-    // console.log(panName)
-
-
-
+    }
+    synthName.connect(panName);
 
     let rect = e.target.getBoundingClientRect();
-    let x = e.clientX - rect.left; //x position within the element.
-    let y = e.clientY - rect.top; //y position within the element.
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
     //Convert new number into -1 - 1 range to work with Pan numbering
-    let xPanWidth = (Math.floor(x) / rect.width * 2) - 1
+
     //Convert number to format for actaves
-    let octaveClick = 6 - (Math.floor((y / rect.height) * 5))
+    let octaveClick = 6 - (Math.floor((y / rect.height) * 5));
 
-    let gradientPercY = y / rect.height * 100
-    let gradientPercX = x / rect.width * 100
-
-
+    let gradientPercY = y / rect.height * 100;
+    let gradientPercX = x / rect.width * 100;
 
     $(targetTwo).css(
       'background', 'radial-gradient(at ' + gradientPercX + '% ' + gradientPercY + '%, rgba(255, 255, 255, 0.5)0%, rgba(101,141,210,0.0) 41%)');
 
-    console.log(octaveClick)
+    console.log(octaveClick);
     synthName.triggerAttackRelease(noteArray(octaveClick), '1n');
   });
 };
-
+//establishes both of the sounds immediatly, these are called again, based on user input, or changes in the loading
 synthSetup(audioButton, panner, ".areaShow", 1);
 synthSetup(audioButton2, pannerTwo, ".areaShow2", 2);
 
 
 
-
+// this is the UI for the circles that appear when you click somewhere
 function popupMaker(target, targetPop) {
   target;
   targetPop;
   $(target).click(function (e) {
-
-
-    //stop function was a miracle to find. Was getting animation delays due to blowing the queue with bunch of fade in / out requests. 
-    // $(".popup").stop();
-    // $(".popup2").stop();
     $(targetPop).stop();
-
     $(".popup").css({
       left: e.pageX,
       top: e.pageY
     });
-
     $(".popup").fadeIn(100).fadeOut(700);
-    // $(".popup").fadeOut(700);
-
     $(".popup2").css({
       left: e.pageX,
       top: e.pageY
     });
-
     $(".popup2").fadeIn(300);
     $(".popup2").fadeOut(300);
-
     $(targetPop).fadeIn(300);
     $(targetPop).fadeOut(800);
 
   });
-}
-
-popupMaker(".area", ".areaShow")
-popupMaker(".area2", ".areaShow2")
+};
 
 
+//establish the UI for both sides. didn't want to have them as a combied function as it would mean the circle would move from one to another
+popupMaker(".area", ".areaShow");
+popupMaker(".area2", ".areaShow2");
 
-$(".x").on("click", function () {
-    $(".popUpMenu").hide();
-    $(".x").hide();
-  }
-
-)
-
-
+// set up all of the effect loops
 let ocean = new Tone.Player("assets/ocean.mp3").toDestination();
 let bird1 = new Tone.Player("assets/birds1.mp3").toDestination();
-
 let bird2 = new Tone.Player("assets/birds2.mp3").toDestination();
 let bird3 = new Tone.Player("assets/birds3.mp3").toDestination();
 let rain = new Tone.Player("assets/rain.mp3").toDestination();
@@ -492,7 +456,7 @@ let beach = new Tone.Player("assets/beach.mp3").toDestination();
 let wind = new Tone.Player("assets/wind.mp3").toDestination();
 
 
-
+//setup the knob functionality, I'm using a frameworks to support this as I really wanted a knob instead of a slider, which would have been easier, but not as fun to use
 function knobFunction(target, parent, toneName) {
   toneName.autostart = true;
   toneName.volume.value = -100;
@@ -520,6 +484,8 @@ function knobFunction(target, parent, toneName) {
   });
 }
 
+
+//connect the effects loops to the knobs
 knobFunction("birds", ".knob-container1", bird1);
 knobFunction("birds2", ".knob-container7", bird2);
 knobFunction("birds3", ".knob-container9", bird3);
@@ -530,6 +496,8 @@ knobFunction("forest", ".knob-container5", forest);
 knobFunction("beach", ".knob-container6", beach);
 knobFunction("wind", ".knob-container8", wind);
 
+
+//establish the nexus oscillators, which is the thing making the sound visualisation
 Nexus.colors.accent = "black";
 Nexus.colors.fill = "#fff";
 
@@ -538,10 +506,8 @@ let oscilloscope2 = new Nexus.Oscilloscope('#oscilloscope2', {});
 
 oscilloscope.connect(merge);
 oscilloscope2.connect(merge2);
+
 //CURSOR FUNCTIONS
-
-
-
 const cursor = document.querySelector('.cursor');
 const cursor2 = document.querySelector('.cursor2');
 const area1 = document.querySelector('.area');
@@ -553,20 +519,19 @@ function cursorForBoxes(box, pointerBox) {
   $(pointerBox).hide();
   box.addEventListener('mousemove', e => {
     pointerBox.setAttribute("style", "top: " + e.clientY + "px; left: " + e.clientX + "px;");
-
-
-
   });
   box.addEventListener('mouseleave', e => {
     $(pointerBox).hide();
   })
 }
 
+
+// this is part of the pop up UI
 cursorForBoxes(area1, cursor);
 cursorForBoxes(area2, cursor2);
 
 
-
+//this was really important for me to get right, and took quiet a bit of time. Basically this functions ensures that when some dropdowsn are activated, others are closed
 let keyDisplay = (target, area) => {
   $(target).click(function () {
 
@@ -576,8 +541,8 @@ let keyDisplay = (target, area) => {
         $(area).fadeIn(100);
       } else {
         $(area).hide();
-      }
-    }
+      };
+    };
     if (target == '.selectedMood') {
       if ($(area).first().is(":hidden")) {
         console.log("working")
@@ -586,16 +551,20 @@ let keyDisplay = (target, area) => {
         $(area).fadeIn(100);
       } else {
         $(area).hide();
-      }
-    }
+      };
+    };
   });
-}
-
-keyDisplay('.selectedNote', '.notes')
-keyDisplay('.selectedKey', '.keys')
-keyDisplay('.selectedMood', '.moods')
+};
 
 
+// assigning the function to the drop downs in the options menu
+keyDisplay('.selectedNote', '.notes');
+keyDisplay('.selectedKey', '.keys');
+keyDisplay('.selectedMood', '.moods');
+
+
+
+//this is the menu display, did a combo function for all menus as I needed the top one to be able to close the additional drop downs within it, the bottom one doesn't need this hence the if statements
 let menuDisplay = (target, area) => {
   $(target).click(function () {
 
@@ -618,40 +587,38 @@ let menuDisplay = (target, area) => {
         $('.notes').hide();
         $('.keys').hide();
         $(area).slideDown(200);
+        $('.bigspace').slideDown(200);
+        
       } else {
         $('.presets > span ').removeClass("arrowFlip");
         $(area).slideUp(200);
-      }
-    }
+        $('.bigspace').slideUp(200);
+      };
+    };
   });
 }
 
-menuDisplay('.options', '.setarea')
-menuDisplay('.presets', '.presetsArea')
 
+//establish button logic for both menus
+menuDisplay('.options', '.setarea');
+menuDisplay('.presets', '.presetsArea');
+
+//if there is change in the key activate it, also, if one is selected of the musical keys and the other isn't, select a note or key by default to ensure a key is selected
 $('.keySettings').change(function () {
   showWeatherNotActive();
   // auto populate DIV with note when changed 
-  // $('.notes').change(function() {
   let setNoteValue = $("input[name='note']:checked").val();
   let setKeyValue = $("input[name='key']:checked").val();
-  // let setMoodValue = $("input[name='mood']:checked").val();
 
   if (setNoteValue) {
-
     if ($("input[name='key']:checked") === undefined) {
-      console.log("no key!!")
-    }
-
-  }
-
-
+      console.log("no key!!");
+    };
+  };
   if (setKeyValue) {
     $('.actualKey').text(setKeyValue);
     $('.keys').slideUp(100)
-
-  }
-
+  };
 });
 
 $('.notes').change(function () {
@@ -672,14 +639,14 @@ $('.notes').change(function () {
 
   //check if a key has been selected, if not, select major by default
   if ($("input[name='key']:checked").val() == undefined) {
-    console.log("no key!!")
+    console.log("no key!!");
     $("#major").prop("checked", true);
-    $('.actualKey').text("Major")
-  }
+    $('.actualKey').text("Major");
+  };
 });
 
 
-
+//this function is all about changing the UI to ensure that certain states show as active or inactive
 function setDaKey() {
   $('.actualMood').text("---");
   $('.keytypes').removeClass("grey");
@@ -698,56 +665,68 @@ function gradientFades(side, css) {
 };
 
 //here is the larger function, this checks which tone is selected then changes it accordingly, tried to make this as small as possible by 
-function gradientChanger(side,number) {
-  if($(`input[name='tone${number}']:checked`).val() === `strings${number}`) {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(255,250,170,0.41) 0%, rgba(245,230,59,0.45) 50%, rgba(80,159,203,1) 100%)"} );
-  } 
-  else if($(`input[name='tone${number}']:checked`).val() === `flute${number}`) {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
-  }
-  else if($(`input[name='tone${number}']:checked`).val() === `piano${number}`)  {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(249,231,170,0.6) 0%, rgba(245,86,59,0.4) 50%, rgba(101,141,210,1) 100%)"});
-  }
-  else if($(`input[name='tone${number}']:checked`).val() === `sine${number}`)   {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(170,229,249,1) 0%, rgba(59,203,245,0.4) 50%, rgba(101,141,210,1) 100%)"});
-  }
-  else if($(`input[name='tone${number}']:checked`).val() === `casio${number}`)  {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(248,205,250,0.1) 0%, rgba(199,59,245,0.3) 50%, rgba(101,141,210,1) 100%)"});
-  }
-  else if($(`input[name='tone${number}']:checked`).val() === `guitar${number}`)  {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(255,215,92,0.5) 0%, rgba(223,146,83,0.45) 50%, rgba(80,159,203,1) 100%)"});
-  }  
-  else if($(`input[name='tone${number}']:checked`).val() === `strings2${number}`)  {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 212, 255, 0.3) 0%, rgba(68, 68, 173, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
-  }  
-  else if($(`input[name='tone${number}']:checked`).val() === `clarinet${number}`)  {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(234,255,244,1) 0%, rgba(83,223,182,0.45) 50%, rgba(80,159,203,1) 100%)"});
-  }  
-  else if($(`input[name='tone${number}']:checked`).val() === `tapebells${number}`)  {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(239,255,247,0.81) 0%, rgba(59,216,245,0.45) 50%, rgba(72,125,150,1) 100%)"});
-  }  
-  else if($(`input[name='tone${number}']:checked`).val() === `tapeguitar${number}`)  {
-    gradientFades(side,{"background": "linear-gradient(180deg, rgba(255,221,170,0.3) 0%, rgba(245,96,59,0.4) 50%, rgba(80,159,203,1) 100%)"});
-  }    
-  else {
+function gradientChanger(side, number) {
+  if ($(`input[name='tone${number}']:checked`).val() === `strings${number}`) {
+    gradientFades(side, {
+      "background": "linear-gradient(180deg, rgba(255,250,170,0.41) 0%, rgba(245,230,59,0.45) 50%, rgba(80,159,203,1) 100%)"
+    });
+  } else if ($(`input[name='tone${number}']:checked`).val() === `flute${number}`) {
+    gradientFades(side, {
+      "background": "linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"
+    });
+  } else if ($(`input[name='tone${number}']:checked`).val() === `piano${number}`) {
+    gradientFades(side, {
+      "background": "linear-gradient(180deg, rgba(249,231,170,0.6) 0%, rgba(245,86,59,0.4) 50%, rgba(101,141,210,1) 100%)"
+    });
+  } else if ($(`input[name='tone${number}']:checked`).val() === `sine${number}`) {
+    gradientFades(side, {
+      "background": "linear-gradient(180deg, rgba(170,229,249,1) 0%, rgba(59,203,245,0.4) 50%, rgba(101,141,210,1) 100%)"
+    });
+  } else if ($(`input[name='tone${number}']:checked`).val() === `casio${number}`) {
+    gradientFades(side, {
+      "background": "linear-gradient(180deg, rgba(248,205,250,0.1) 0%, rgba(199,59,245,0.3) 50%, rgba(101,141,210,1) 100%)"
+    });
+  } else if ($(`input[name='tone${number}']:checked`).val() === `guitar${number}`) {
+    gradientFades(side, {
+      "background": "linear-gradient(180deg, rgba(255,215,92,0.5) 0%, rgba(223,146,83,0.45) 50%, rgba(80,159,203,1) 100%)"
+    });
+  } else if ($(`input[name='tone${number}']:checked`).val() === `strings2${number}`) {
+    gradientFades(side, {
+      "background": "linear-gradient(180deg, rgba(0, 212, 255, 0.3) 0%, rgba(68, 68, 173, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"
+    });
+  } else if ($(`input[name='tone${number}']:checked`).val() === `clarinet${number}`) {
+    gradientFades(side, {
+      "background": "linear-gradient(180deg, rgba(234,255,244,1) 0%, rgba(83,223,182,0.45) 50%, rgba(80,159,203,1) 100%)"
+    });
+  } else if ($(`input[name='tone${number}']:checked`).val() === `tapebells${number}`) {
+    gradientFades(side, {
+      "background": "linear-gradient(180deg, rgba(239,255,247,0.81) 0%, rgba(59,216,245,0.45) 50%, rgba(72,125,150,1) 100%)"
+    });
+  } else if ($(`input[name='tone${number}']:checked`).val() === `tapeguitar${number}`) {
+    gradientFades(side, {
+      "background": "linear-gradient(180deg, rgba(255,221,170,0.3) 0%, rgba(245,96,59,0.4) 50%, rgba(80,159,203,1) 100%)"
+    });
+  } else {
     $(side).fadeOut("slow")
-  }
-  
+  };
+};
 
-}
 
+// this is used for instances were the tones have been selected by non direct user interactions (ie: on load, on loading preset, on weather API)
 function thingsChange(target, gradientMask, number) {
-$(target).change(function (e) { 
-  gradientChanger(gradientMask, number)
-  // gradientChanger(gradientMask, number)
-  showWeatherNotActive();
-})
-}
-
-thingsChange('.set1', ".gradient1", 1)
-thingsChange('.set2', ".gradient2", 2)
+  $(target).change(function (e) {
+    gradientChanger(gradientMask, number)
+    // gradientChanger(gradientMask, number)
+    showWeatherNotActive();
+  });
+};
 
 
+// activate early
+thingsChange('.set1', ".gradient1", 1);
+thingsChange('.set2', ".gradient2", 2);
+
+// if the key changes, make sure to change the delay and slide up the actual selection to lower the amount of user clicks needed
 $('.keys').change(function () {
   //turn off delays to avoid soundclashes
   delay.feedback.value = 0;
@@ -767,7 +746,7 @@ $('.keys').change(function () {
 });
 
 
-//welcome to JQUERY HELLLLL
+//welcome to JQUERY HELLLLL , this is for ensuring that the UI looks pretty and clean when a mood is selected, it ensure the musical key selection is activated
 function setDaMood() {
   $("input[name='note']:checked").removeAttr('checked')
   $("input[name='key']:checked").removeAttr('checked')
@@ -778,26 +757,19 @@ function setDaMood() {
   $('.selectedKey').addClass("grey");
   $('.keytypes2').removeClass("grey");
   $('.selectedMood').removeClass("grey");
-}
+};
 
-
-
-
-
+// if the mood changes, ensure to use the above function and slide it up
 $('.moods').change(function () {
   let setMoodValue = $("input[name='mood']:checked").val();
   setDaMood();
-
   $('.actualMood').text(setMoodValue);
   $('.moods').slideUp(100);
 });
 
 
 
-
-
-
-
+//fire base stuff, ripped directly from our previous lesson, developed the app about 75% before trying to implement this into it. Firebase is used to store presets from the user
 import * as database from './database';
 
 
@@ -819,7 +791,6 @@ const buildMessageRow = (messageItem) => {
     
   `;
 
-  // todo: consider using delegation for this instead
   newMessageRow.querySelector('.upvote').addEventListener('click', async () => {
     await database.messages.updateVotes(messageItem.id, 1);
     renderList();
@@ -832,8 +803,8 @@ const buildMessageRow = (messageItem) => {
     await database.messages.delete(messageItem.id);
     renderList();
   });
+  //added this into allow the user to actually load presets from the list
   newMessageRow.querySelector('.load').addEventListener('click', async () => {
-    // await database.messages
     console.log(messageItem);
     $(`#${messageItem.Tone1}`).prop("checked", true);
     $(`#${messageItem.Tone2}`).prop("checked", true);
@@ -884,7 +855,7 @@ const renderList = async () => {
 const onLoadHandler = async () => {
   // initial render of list
   await renderList();
-// So good putting the gradient changes here, means the browser gently loads in the shades once finished looading 
+  // So good putting the gradient changes here, means the browser gently loads in the shades once finished looading 
   gradientChanger(".gradient1", 1);
   gradientChanger(".gradient2", 2);
   $('.hiddenKnobs').delay(800).slideDown(700);
@@ -910,45 +881,45 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', onLoadHandler);
 } else {
   onLoadHandler();
-}
+};
 
 
-
+//simple little function for showing additional notification when things are loaded (mainly weather or user presets)
 function notification(message) {
   $('.notification').text(message);
   $('.notification').fadeIn(100).delay(800);
   $('.notification').fadeOut(1200);
 };
 
-
+//hide or show the effects knobs lane
 $('.effects').on("click", function () {
   if ($('.hiddenKnobs').first().is(":hidden")) {
-    $('.effects').text("HIDE FX")
+    $('.effects').text("HIDE FX");
     $('.hiddenKnobs').slideDown(700);
   } else {
-    $('.effects').text("SHOW FX")
+    $('.effects').text("SHOW FX");
     $('.hiddenKnobs').slideUp(700);
-  }
-})
+  };
+});
 
+
+//VEEEEEEERY BASIC idea here, but seemed like a good idea, basically get the users location, and load a settings based on their weather
 // https://www.w3schools.com/html/html5_geolocation.asp
 $('.getLat ').on("click", function () {
-  $('.weatherDetails').remove()
-  $('#weatherState').text("Loading")
-  $('#weatherState').addClass("loading")
-  $('#weatherState').removeClass("offline")
+  $('.weatherDetails').remove();
+  $('#weatherState').text("Loading");
+  $('#weatherState').addClass("loading");
+  $('#weatherState').removeClass("offline");
 
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else {
     x.innerHTML = "Geolocation is not supported by this browser.";
-  }
+  };
+});
 
-
-})
-
-// import (weatherKey) as weatherKey from './keys'
+//here's the weather api call
 const getWeather = function (lat, lon) {
 
   let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}6&lon=${lon}&appid=${database.weatherCall.apiKey}&exclude=hourly,hourly,daily&units=metric`
@@ -960,9 +931,8 @@ const getWeather = function (lat, lon) {
         throw new Error('Something went really wrong');
       }
     })
-    // .then((response) => response.json())
-    // .then((json) => console.log(`${convertToCel(json.main.temp)}° Celsius`));
     .then((json) => {
+      //this is where I print the read out into the DOM
       console.log(json.current.weather[0].main);
       console.log(json.current.temp);
       console.log(json.current);
@@ -980,31 +950,27 @@ const getWeather = function (lat, lon) {
       Temperature: <b>${Math.floor(json.current.temp)}°</b> Cel <br>
       Feels Like:  <b>${Math.floor(json.current.feels_like)}°</b> Cel <br>
       Conditions:  <span class="caps">${json.current.weather[0].description}</span> <br>
-      </div>`)
-
-
-
-
+      </div>`);
       $('.weatherImage').append(
         `<img class="actualWeatherImage"src="http://openweathermap.org/img/wn/${json.current.weather[0].icon}@2x.png" alt="">`
-
-
-      )
+      );
     })
     .catch((error) => {
       console.error('BURGER:', error);
-    })
+    });
 };
 
-function showWeatherNotActive () {
-  $('#weatherState').addClass("offline")
-  $('#weatherState').text("Not Applied")
-}
+
+//simple function to clear the weather status, if a user deviates from the provided preset, the status changes, this is the function that is called on within others
+function showWeatherNotActive() {
+  $('#weatherState').addClass("offline");
+  $('#weatherState').text("Not Applied");
+};
 
 
 
 
-
+//this is another mini function for printing weather results 
 function noteAndKeySelector(note, key, tone1, tone2) {
   $(`#${note}`).prop("checked", true);
   $(`#${key}`).prop("checked", true);
@@ -1015,47 +981,36 @@ function noteAndKeySelector(note, key, tone1, tone2) {
 
 }
 // https://openweathermap.org/weather-conditions
+// this is the function that uses the weather conditions to determine what tones to play
 function weatherTones(conditions) {
-
   if (conditions === "Clouds") {
     console.log("The clouds work!");
-    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', );
+    noteAndKeySelector('f', 'minor', 'piano1', 'strings2', );
   } else if (conditions === "Clear") {
     console.log("The clear work!")
-    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', )
+    noteAndKeySelector('g', 'major', 'tapeguitar1', 'strings22', )
   } else if (conditions === "Snow") {
     console.log("The snow work!")
-    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', )
+    noteAndKeySelector('as', 'major', 'strings1', 'tapebell2', )
   } else if (conditions === "Rain") {
     console.log("The clear work!")
-    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', )
+    noteAndKeySelector('f', 'major', 'piano1', 'piano2', )
   } else if (conditions === "Drizzle") {
     console.log("The drizzle work!")
-    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', )
+    noteAndKeySelector('D', 'minor', 'synth1', 'clarinet2', )
   } else if (conditions === "Thunderstorm") {
     console.log("The Thunder work!")
-    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', )
+    noteAndKeySelector('fs', 'minor', 'flute', 'tapeguitar2', )
   } else {
     console.log("Atmosphere conditions")
-  }
+  };
+};
 
-}
-
-
-
-
-
+//this gets the position, and then runs the weather api
 function showPosition(position) {
-  // x.innerHTML = "Latitude: " + position.coords.latitude + 
-  // "<br>Longitude: " + position.coords.longitude;
   $('.weatherImage').empty()
   console.log("Latitude: " + position.coords.latitude +
     "Longitude: " + position.coords.longitude)
-  // console.log(weatherKey)
   getWeather(position.coords.latitude, position.coords.longitude)
 
-
 }
-
-
-
