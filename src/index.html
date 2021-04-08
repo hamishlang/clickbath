@@ -64,28 +64,75 @@
         </div>
 
         <div class="allKnobs">
-            <span>BIRDS
+            <div class="hiddenKnobs">
+            <span>BIRDS 1
                 <div class="knob knob-container1">
-
                     <webaudio-knob id="birds" class="knob1" src="assets/knob2.png" width="50" height="50">
                     </webaudio-knob>
                 </div>
             </span>
+            <span>BIRDS 2
+                <div class="knob knob-container7">
+                    <webaudio-knob id="birds2" class="knob7" src="assets/knob2.png" width="50" height="50">
+                    </webaudio-knob>
+                </div>
+            </span>
+            <span>BIRDS 3
+                <div class="knob knob-container9">
+                    <webaudio-knob id="birds3" class="knob9" src="assets/knob2.png" width="50" height="50">
+                    </webaudio-knob>
+                </div>
+            </span>
             <br>
-            <div>WAVES
+            <span>WAVES
                 <div class="knob knob-container2">
                     <webaudio-knob id="waves" class="knob2" src="assets/knob2.png" width="50" height="50">
                     </webaudio-knob>
                 </div>
-            </div>
-
+            </span>
+            <span>RAIN
+                <div class="knob knob-container3">
+                    <webaudio-knob id="rain" class="knob3" src="assets/knob2.png" width="50" height="50">
+                    </webaudio-knob>
+                </div>
+            </span>
+            <span>THUNDER
+                <div class="knob knob-container4">
+                    <webaudio-knob id="thunder" class="knob4" src="assets/knob2.png" width="50" height="50">
+                    </webaudio-knob>
+                </div>
+            </span>
+            <span>FOREST
+                <div class="knob knob-container5">
+                    <webaudio-knob id="forest" class="knob5" src="assets/knob2.png" width="50" height="50">
+                    </webaudio-knob>
+                </div>
+            </span>
+            <span>BEACH
+                <div class="knob knob-container6">
+                    <webaudio-knob id="beach" class="knob6" src="assets/knob2.png" width="50" height="50">
+                    </webaudio-knob>
+                </div>
+            </span>
+            <span>WIND
+                <div class="knob knob-container8">
+                    <webaudio-knob id="wind" class="knob8" src="assets/knob2.png" width="50" height="50">
+                    </webaudio-knob>
+                </div>
+            </span>
+            
         </div>
+            <div class="effects">HIDE FX</div>
+        </div>
+        
         <div class="area2" id="audio-button2" oncontextmenu="return false;">
+            <div class="gradient2" style="display: none;"></div>
             <div class="cursor2" style="display: none;"></div>
             <div id="oscilloscope2"></div>
             <div class="areaShow2"></div>
             <div class="popup2"></div>
             <div class="popup"></div>
+        
         </div>
         <div class="settingsHouse">
             <div class="settingsButton options">OPTIONS<span class="arrow">&#9660</span></div>
@@ -244,12 +291,12 @@
                                             </div> 
                                             <div class="container">
                                                 <label class="formKey" for="mysterious">Mysterious
-                                                <input class="formKey" type="radio" id="mysterious" name="mood" value="optimistic">
+                                                <input class="formKey" type="radio" id="mysterious" name="mood" value="mysterious">
                                                 <span class="checkmark"></span></label>
                                             </div>
                                             <div class="container">
                                                 <label class="formKey" for="melancholy">Melancholy
-                                                <input class="formKey" type="radio" id="melancholy" name="mood" value="optimistic">
+                                                <input class="formKey" type="radio" id="melancholy" name="mood" value="melancholy">
                                                 <span class="checkmark"></span></label>
                                             </div>
                                         
@@ -308,6 +355,8 @@
     <div class="settingsArea presetsArea" style="display: none;"> 
         <!-- style="display: none;" -->
         <div class="userPresetsHouse">
+            <div class="presetTitle">USER PRESETS MODE</div>
+
         <div class="messageSubmit">
           <form>
 
@@ -338,8 +387,29 @@
       </table>
       </div>
     </div>
+    <div class="weatherHouse">
+<div class="presetTitle">WEATHER PRESET</div>
+<div class="weatherSides">
+<div class="weatherLeft">
+    <button class="getLat">
+        Load Your Weather Preset
+    </button>
+
+</div>
+        <div class="weatherRight">
+            <div class="mode">State:  <span id="weatherState" class="currentMode offline">not loaded</span></div>
+            <!-- <div class="loading"></div> -->
+            <div class="weatherImage"></div>
+
+        </div>
+    </div>
+
+        
     </div>
     
+    </div>
+
+
     
     
     
@@ -353,10 +423,10 @@
 
 
 
-<button class="success">SUCCESS</button>
+<!-- <button class="success">SUCCESS</button> -->
   <div>
     
-  <!-- <button class="test">TEST MEEE</button> -->
+  <button class="test">TEST MEEE</button>
   <!-- js -->
   <script src="./index.js"></script>
   <script src="https://g200kg.github.io/webaudio-controls/webaudio-controls.js"></script>

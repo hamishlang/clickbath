@@ -2,11 +2,20 @@ import firebase from "firebase/app";
 import 'firebase/firestore';
 
 import { firebaseKeys } from './keys';
+import { weatherKey } from './keys';
+
+export const weatherCall = weatherKey;
+// console.log(weatherKey)
+// console.log(weatherCall)
 
 firebase.initializeApp(firebaseKeys);
 
 const db = firebase.firestore();
 
+
+export function weatherCaller() {
+return weatherKey
+}
 export const messages = {
   updateVotes: (id, amount) => {
     return db.collection("clickbath").doc(id).update({
@@ -36,7 +45,9 @@ export const messages = {
         };
       });
     });
-  }
+    
+  },
+  weather: () => { return weatherCall}
 };
 
 

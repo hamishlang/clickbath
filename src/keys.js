@@ -6,3 +6,12 @@ export const firebaseKeys = {
   messagingSenderId: process.env.MESSAGING_SENDER_ID,
   appId: process.env.APP_ID
 };
+
+export const weatherKey = {
+  apiKey: process.env.WEATHER_KEY
+};
+
+// export const weatherKey2 = {
+// apiKey:d52cf576f49bbd4298f4f4f42033b08e
+
+// } 

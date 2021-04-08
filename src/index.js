@@ -202,6 +202,14 @@ let noteArray = (octave) => {
     notes = C
   };
 
+  if ($(`#melancholy`).is(':checked')) {
+    console.log("feeling weird")
+    notes = ['C', 'D', 'Eb', 'G', ];
+  };
+
+
+
+
   if ($(`#c`).is(':checked')) {
     if ($(`#major`).is(':checked')) {
       notes = C
@@ -458,8 +466,16 @@ $(".x").on("click", function () {
 )
 
 
-let bird1 = new Tone.Player("assets/birds1.mp3").toDestination();
 let ocean = new Tone.Player("assets/ocean.mp3").toDestination();
+let bird1 = new Tone.Player("assets/birds1.mp3").toDestination();
+
+let bird2 = new Tone.Player("assets/birds2.mp3").toDestination();
+let bird3 = new Tone.Player("assets/birds3.mp3").toDestination();
+let rain = new Tone.Player("assets/rain.mp3").toDestination();
+let thunder = new Tone.Player("assets/thunder.mp3").toDestination();
+let forest = new Tone.Player("assets/forest.mp3").toDestination();
+let beach = new Tone.Player("assets/beach.mp3").toDestination();
+let wind = new Tone.Player("assets/wind.mp3").toDestination();
 
 
 
@@ -472,17 +488,14 @@ function knobFunction(target, parent, toneName) {
     let knobAdjust = 255 - (event.target.value * 2.55);
     // took a while to get my head around how to translate the 1-100 values to DB values
     let volumeKnobEquation = (event.target.value * 0.5) - 50;
-    // console.log(knobAdjust);
+
     $(parent).css('background-color', 'rgba(100,' + knobAdjust + ', 200, 0.3)')
     toneName.volume.value = volumeKnobEquation
-    // console.log(event.target.value)
+
 
     if (event.target.value > 0) {
       toneName.mute = false
-      // toneName.autostart = true;
-      // console.log(event.target.value)
-      // toneName.start()
-      // bird1.autostart = true;
+
     }
     if (event.target.value === 0) {
       toneName.volume.value = -100;
@@ -493,11 +506,18 @@ function knobFunction(target, parent, toneName) {
   });
 }
 
-knobFunction("birds", ".knob-container1", bird1)
-knobFunction("waves", ".knob-container2", ocean)
+knobFunction("birds", ".knob-container1", bird1);
+knobFunction("birds2", ".knob-container7", bird2);
+knobFunction("birds3", ".knob-container9", bird3);
+knobFunction("waves", ".knob-container2", ocean);
+knobFunction("thunder", ".knob-container4", thunder);
+knobFunction("rain", ".knob-container3", rain);
+knobFunction("forest", ".knob-container5", forest);
+knobFunction("beach", ".knob-container6", beach);
+knobFunction("wind", ".knob-container8", wind);
 
-Nexus.colors.accent = "royalblue"
-Nexus.colors.fill = "#fff"
+Nexus.colors.accent = "black";
+Nexus.colors.fill = "#fff";
 
 let oscilloscope = new Nexus.Oscilloscope('#oscilloscope', {});
 let oscilloscope2 = new Nexus.Oscilloscope('#oscilloscope2', {});
@@ -508,60 +528,30 @@ oscilloscope2.connect(merge2);
 
 
 
-const cursor = document.querySelector('.cursor')
-const cursor2 = document.querySelector('.cursor2')
-const area1 = document.querySelector('.area')
-const area2 = document.querySelector('.area2')
+const cursor = document.querySelector('.cursor');
+const cursor2 = document.querySelector('.cursor2');
+const area1 = document.querySelector('.area');
+const area2 = document.querySelector('.area2');
 
 
 
 function cursorForBoxes(box, pointerBox) {
-  $(pointerBox).hide()
+  $(pointerBox).hide();
   box.addEventListener('mousemove', e => {
-    pointerBox.setAttribute("style", "top: " + e.clientY + "px; left: " + e.clientX + "px;")
+    pointerBox.setAttribute("style", "top: " + e.clientY + "px; left: " + e.clientX + "px;");
 
 
 
-  })
+  });
   box.addEventListener('mouseleave', e => {
-    $(pointerBox).hide()
+    $(pointerBox).hide();
   })
 }
 
-cursorForBoxes(area1, cursor)
-cursorForBoxes(area2, cursor2)
+cursorForBoxes(area1, cursor);
+cursorForBoxes(area2, cursor2);
 
 
-// $('.options').toggle(function () {
-//   $('.setArea').slideDown(200)
-//   // noteCount = true;
-// }, function () {
-//   $('.setArea').slideUp(200)
-//   $('.notes').slideUp(100);
-//   $('.keys').slideUp(100)
-//   // setTrue(noteCount, 0)
-// })
-
-
-// $('.options').toggle(function () {
-//   $('.setArea').slideDown(200)
-//   // noteCount = true;
-// }, function () {
-//   $('.setArea').slideUp(200)
-//   $('.notes').slideUp(100);
-//   $('.keys').slideUp(100)
-//   // setTrue(noteCount, 0)
-// })
-
-// $('.presets').toggle(function () {
-//   $('.presetsArea').slideDown(200)
-//   // noteCount = true;
-// }, function () {
-//   $('.presetsArea').slideUp(200)
-//   // $('.notes').slideUp(100);
-//   // $('.keys').slideUp(100)
-//   // setTrue(noteCount, 0)
-// })
 
 let keyDisplay = (target, area) => {
   $(target).click(function () {
@@ -597,22 +587,25 @@ let menuDisplay = (target, area) => {
 
     if (target == '.options') {
       if ($(area).first().is(":hidden")) {
-        
+
         $(area).slideDown(200);
+        $('.options > span ').addClass("arrowFlip");
       } else {
+        $('.options > span ').removeClass("arrowFlip");
         $(area).slideUp(200);
         $('.moods').hide();
         $('.keys').hide();
         $('.notes').hide();
       }
-    }
-    else {
+    } else {
       if ($(area).first().is(":hidden")) {
-        console.log("working")
+        $('.presets > span ').addClass("arrowFlip");
+        console.log("working");
         $('.notes').hide();
         $('.keys').hide();
         $(area).slideDown(200);
       } else {
+        $('.presets > span ').removeClass("arrowFlip");
         $(area).slideUp(200);
       }
     }
@@ -623,7 +616,7 @@ menuDisplay('.options', '.setarea')
 menuDisplay('.presets', '.presetsArea')
 
 $('.keySettings').change(function () {
-
+  showWeatherNotActive();
   // auto populate DIV with note when changed 
   // $('.notes').change(function() {
   let setNoteValue = $("input[name='note']:checked").val();
@@ -651,21 +644,16 @@ $('.notes').change(function () {
   //turn off delays to avoid soundclashes
   delay.feedback.value = 0;
   delay2.feedback.value = 0;
+  showWeatherNotActive();
   let setNoteValue = $("input[name='note']:checked").val();
   $('.notes').slideUp(100);
   $('.actualNote').text(setNoteValue);
-
   $('.actualMood').text("---");
-
   $('.keytypes').removeClass("grey");
   $('.selectedNote').removeClass("grey");
   $('.selectedKey').removeClass("grey");
-
-
   $('.keytypes2').addClass("grey");
   $('.selectedMood').addClass("grey");
-
-
   $("input[name='mood']:checked").removeAttr('checked')
 
   //check if a key has been selected, if not, select major by default
@@ -680,16 +668,60 @@ $('.notes').change(function () {
 
 function setDaKey() {
   $('.actualMood').text("---");
-
   $('.keytypes').removeClass("grey");
   $('.selectedNote').removeClass("grey");
   $('.selectedKey').removeClass("grey");
-
-
   $('.keytypes2').addClass("grey");
   $('.selectedMood').addClass("grey");
   $("input[name='mood']:checked").removeAttr('checked')
 }
+
+function gradientFades(side, css) {
+  $(side).fadeOut(50);
+  $(side).css(css);
+  $(side).fadeIn("slow");
+};
+
+function gradientChanger(side) {
+  if($("input[name='tone2']:checked").val() === 'strings2' ||$("input[name='tone1']:checked").val() === 'strings1') {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 212, 255, 0.3) 0%, rgba(68, 68, 173, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"} );
+  } 
+  else if($("input[name='tone2']:checked").val() === 'flute2' || $("input[name='tone1']:checked").val() === 'flute1') {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
+  }
+  else if($("input[name='tone2']:checked").val() === 'flute2' || $("input[name='tone1']:checked").val() === 'flute1') {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
+  }
+  else if($("input[name='tone2']:checked").val() === 'flute2' || $("input[name='tone1']:checked").val() === 'flute1') {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
+  }
+  else if($("input[name='tone2']:checked").val() === 'flute2' || $("input[name='tone1']:checked").val() === 'flute1') {
+    gradientFades(side,{"background": "linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%)"});
+  }  
+  else {
+    $(side).fadeOut("slow")
+  }
+  
+
+}
+
+function thingsChange(target) {
+$(target).change(function (e) { 
+
+  gradientChanger(".gradient2")
+  
+  
+ 
+
+
+
+  showWeatherNotActive();
+})
+}
+
+thingsChange('.set1')
+thingsChange('.set2')
+
 
 
 $('.keys').change(function () {
@@ -700,7 +732,7 @@ $('.keys').change(function () {
   $('.keys').slideUp(100);
   $('.actualKey').text(setKeyValue);
 
-setDaKey();
+  setDaKey();
 
   //check if a key has been selected, if not, select major by default
   if ($("input[name='note']:checked").val() == undefined) {
@@ -784,17 +816,19 @@ const buildMessageRow = (messageItem) => {
     if (messageItem.keyMood !== "---") {
       console.log("it's a mood key")
       $(`#${messageItem.keyMood}`).prop("checked, true")
-      setDaMood()
+      setDaMood();
+      showWeatherNotActive();
       $('.actualMood').text(messageItem.keyMood)
-      
-    } if (messageItem.keyNote !== "---") {
+
+    }
+    if (messageItem.keyNote !== "---") {
       console.log("it's a musical key")
       $(`#${messageItem.keyNote}`).prop("checked", true)
       $(`#${messageItem.keyScale}`).prop("checked", true)
       setDaKey()
-      $('.actualNote').text(messageItem.keyNote)
-      $('.actualKey').text(messageItem.keyScale)
-     
+      showWeatherNotActive();
+      $('.actualNote').text(messageItem.keyNote);
+      $('.actualKey').text(messageItem.keyScale);
     }
     notification(`${messageItem.Name} loaded`)
     // renderList();
@@ -849,12 +883,154 @@ if (document.readyState === 'loading') {
 
 
 function notification(message) {
+  $('.notification').text(message);
+  $('.notification').fadeIn(100).delay(800);
+  $('.notification').fadeOut(1200);
+};
 
-$('.notification').text(message)
-$('.notification').fadeIn(100).delay(800)
-$('.notification').fadeOut(1200)
+
+$('.effects').on("click", function () {
+  if ($('.hiddenKnobs').first().is(":hidden")) {
+    $('.effects').text("HIDE FX")
+    $('.hiddenKnobs').slideDown(700);
+  } else {
+    $('.effects').text("SHOW FX")
+    $('.hiddenKnobs').slideUp(700);
+  }
+})
+
+// https://www.w3schools.com/html/html5_geolocation.asp
+$('.getLat ').on("click", function () {
+  $('.weatherDetails').remove()
+  $('#weatherState').text("Loading")
+  $('#weatherState').addClass("loading")
+  $('#weatherState').removeClass("offline")
+
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+
+
+})
+
+// import (weatherKey) as weatherKey from './keys'
+const getWeather = function (lat, lon) {
+
+  let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}6&lon=${lon}&appid=${database.weatherCall.apiKey}&exclude=hourly,hourly,daily&units=metric`
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Something went really wrong');
+      }
+    })
+    // .then((response) => response.json())
+    // .then((json) => console.log(`${convertToCel(json.main.temp)}° Celsius`));
+    .then((json) => {
+      console.log(json.current.weather[0].main);
+      console.log(json.current.temp);
+      console.log(json.current);
+      console.log("something else");
+      $('.loading').text('Weather Preset Loaded');
+      notification("Weather Loaded");
+      $('#weatherState').removeClass("loading")
+      weatherTones(json.current.weather[0].main);
+      setDaKey();
+      $('.weatherImage').empty()
+      $('.weatherRight').append(`
+      <div class="weatherDetails">
+      Temperature: <b>${Math.floor(json.current.temp)}°</b> Cel <br>
+      Feels Like:  <b>${Math.floor(json.current.feels_like)}°</b> Cel <br>
+      Conditions:  <span class="caps">${json.current.weather[0].description}</span> <br>
+      </div>`)
+
+
+
+
+      $('.weatherImage').append(
+        `<img class="actualWeatherImage"src="http://openweathermap.org/img/wn/${json.current.weather[0].icon}@2x.png" alt="">`
+
+
+      )
+    })
+    .catch((error) => {
+      console.error('BURGER:', error);
+    })
+};
+
+function showWeatherNotActive () {
+  $('#weatherState').addClass("offline")
+  $('#weatherState').text("Not Applied")
+}
+
+
+
+
+
+function noteAndKeySelector(note, key, tone1, tone2) {
+  $(`#${note}`).prop("checked", true);
+  $(`#${key}`).prop("checked", true);
+  $(`#${tone1}`).prop("checked", true);
+  $(`#${tone2}`).prop("checked", true);
+  $('.actualNote').text(note);
+  $('.actualKey').text(key);
+
+}
+// https://openweathermap.org/weather-conditions
+function weatherTones(conditions) {
+
+  if (conditions === "Clouds") {
+    console.log("The clouds work!");
+    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', );
+  } else if (conditions === "Clear") {
+    console.log("The clear work!")
+    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', )
+  } else if (conditions === "Snow") {
+    console.log("The snow work!")
+    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', )
+  } else if (conditions === "Rain") {
+    console.log("The clear work!")
+    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', )
+  } else if (conditions === "Drizzle") {
+    console.log("The drizzle work!")
+    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', )
+  } else if (conditions === "Thunderstorm") {
+    console.log("The Thunder work!")
+    noteAndKeySelector('f', 'minor', 'piano1', 'piano2', )
+  } else {
+    console.log("Atmosphere conditions")
+  }
 
 }
 
 
-$('.success').on("click", function () {notification("Scale Changed")})
+
+
+
+function showPosition(position) {
+  // x.innerHTML = "Latitude: " + position.coords.latitude + 
+  // "<br>Longitude: " + position.coords.longitude;
+  $('.weatherImage').empty()
+  console.log("Latitude: " + position.coords.latitude +
+    "Longitude: " + position.coords.longitude)
+  // console.log(weatherKey)
+  getWeather(position.coords.latitude, position.coords.longitude)
+
+
+}
+
+$('.test').on("click", function() {
+  if ($('.gradient2').first().is(":hidden")) {
+  
+  $(".gradient2").fadeIn("slow"); }
+  else {
+    $(".gradient2").fadeOut("slow");
+  }
+    
+
+})
+

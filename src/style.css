@@ -68,23 +68,50 @@ a {
 }
 
 
+.area,
+.area2 {
+    background: linear-gradient(180deg, rgba(232, 232, 232, 0.1) 0%, rgba(103, 103, 103, 0.1) 50%, rgba(129, 129, 130, 0.4) 100%);
+}
 
 
 
 
 .area {
-    /* background: linear-gradient(180deg, rgba(0, 212, 255, 0.4) 0%, rgba(68, 68, 173, 0.4) 50%, rgba(101, 141, 210, 1) 100%); */
-    background: linear-gradient(180deg, rgba(0, 212, 255, 0.4) 0%, rgba(68, 68, 173, 0.4) 50%, rgba(101, 141, 210, 1) 100%);
+    /* background: linear-gradient(180deg, rgba(232, 232, 232, 0.4) 0%, rgba(103, 103, 103, 0.4) 50%, rgba(129, 129, 130, 0.7) 100%); */
     display: inline-block;
     grid-area: a1;
     /* cursor: none; */
 }
 
 .area2 {
-    /* background: linear-gradient(180deg, rgba(232, 232, 232, 0.4) 0%, rgba(103, 103, 103, 0.4) 50%, rgb(129, 129, 130) 100%); */
-    background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109, 0.4) 50%, rgba(101, 141, 210, 1) 100%);
+    /* default */
+    
+     /* Synth */
+    /* background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109, 0.4) 50%, rgba(101, 141, 210, 1) 100%) *//* Piano */
+    /* background: linear-gradient(180deg, rgba(0, 212, 255, 0.4) 0%, rgba(68, 68, 173, 0.4) 50%, rgba(101, 141, 210, 1) 100%); */
+    /* Casio 1 */
+    /* background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109, 0.4) 50%, rgba(101, 141, 210, 1) 100%) *//* Strings 1 */
+    /* background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109, 0.4) 50%, rgba(101, 141, 210, 1) 100%) *//* Flute */
+    /* background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109, 0.4) 50%, rgba(101, 141, 210, 1) 100%) */
     display: inline-block;
     grid-area: a2;
+}
+
+
+.overlay2 {
+    /* background-color: rgba(127, 255, 212, 0.379); */
+background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109, 0.4) 50%, rgba(101, 141, 210, 1) 100%);
+
+
+}
+
+.gradient2 {
+    grid-area: a2;
+    background: linear-gradient(180deg, rgba(0, 255, 217, 0.3) 0%, rgba(42, 105, 109, 0.3) 50%, rgba(101, 141, 210, 0.8) 100%);
+    border-radius: 20px;
+    position: absolute;
+    width: 500px;
+    height: 700px;
 }
 
 
@@ -92,7 +119,7 @@ a {
 .areaShow,
 .areaShow2,
 .area2 {
-    /* cursor: none; */
+    cursor: none;
     width: 500px;
     height: 700px;
     margin: auto 0;
@@ -143,6 +170,14 @@ a {
     height: 30px;
     display: inline-block;
 } */
+.hiddenKnobs span {
+    color: rgb(206, 206, 206);
+    transition: background-color .4s ease-in-out;
+}
+
+.hiddenKnobs span:active {
+    color: rgba(68, 68, 173, 1);
+}
 
 
 .knob {
@@ -295,11 +330,14 @@ a {
 }
 
 .settingsButton .arrow {
-    font-size: 10px;
-    /* vertical-align:auto; */
+    font-size: 8px;
+    vertical-align:middle;
     display: inline-block;
     padding: 5.5px;
+    /* padding-top: 10px; */
+    /* transform: translate(0px, -1px); */
     position: inherit;
+    
     /* trans */
     /* transition: transform .5s; */
 }
@@ -309,7 +347,7 @@ a {
 
 }
 
-.settingsButton:active .arrow {
+.arrowFlip {
     transform: rotate(180deg);
 
 }
@@ -366,8 +404,8 @@ a {
     user-select: none;
     display: grid;
     grid-template-areas:
-        'up . .';
-    grid-template-columns: 500px auto auto;
+        'up . wea';
+    grid-template-columns: 500px 60px auto;
     margin-bottom: 2em;
     height: 300px;
 }
@@ -377,13 +415,15 @@ a {
 /* USER PRESET TABLE STYLES */
 
 #newmessage {
-    width: 150px;
-    height: 30px;
+    width: 161px;
+    height: 34px;
     display: inline-block;
     border-radius: 5px;
     border: 2px solid rgba(68, 68, 173, 0.3);
     padding: 5px;
-    font-family: recolata;
+    font-family: 'poppins';
+    letter-spacing: -0.7px;
+
 }
 #newmessage:focus {
     outline: none;
@@ -399,9 +439,20 @@ a {
     /* width: 300px; */
     display: inline-block;
     font-family: recolata;
-    padding: 3px 8px;
+    padding: 5px 16px;
     border: 2px solid rgba(68, 68, 173, 0.3);
     border-radius: 5px;
+    cursor: pointer;
+    transform: translateY(-1px);
+    height: 34px;
+}
+#submit:hover {
+    background-color: rgba(68, 68, 173, 0.7);
+    color: white;
+}
+
+#submit:focus {
+    outline: none;
 }
 
 #submit span {
@@ -414,9 +465,13 @@ a {
 #submit i {
     vertical-align: middle;
 }
+#submit:hover i {
+   color: white;
+}
 
 .messageSubmit {
     padding: 5px;
+    text-align: center;
 }
 
 .messageSubmit button {
@@ -438,6 +493,9 @@ background-color: white;
 
 table {
     text-align: center;
+    font-family: 'poppins';
+    font-weight: 300;
+    letter-spacing: -0.7px;
 }
 
 thead {
@@ -465,6 +523,7 @@ thead {
     height: 38px;
     box-sizing: content-box;
     text-align: start;
+    font-size: 14px;
 
 }
 
@@ -493,16 +552,25 @@ table {
 .userPresetsHouse {
     grid-area: up;
     padding-left: 10px;
-    background-color:  #BDC1E1;
     border-radius: 13px;
+    background-color:  #bdc1e1d2;
+    border-radius: 13px;
+    font-family: recolata; 
+    transition: background-color .2s;
+}
+.userPresetsHouse:hover {
+    background-color:  #BDC1E1;
 }
 
+
 .userpresets {
-    height: 220px;
+    height: 210px;
     overflow-y : auto;
-    width: 380px;
+    width: 378px;
     background-color: white;
     border-radius: 8px;
+    margin: 0px auto;
+    padding-left: 2px;
     /* overflow-x: hidden; */
 }
 
@@ -558,7 +626,8 @@ body::-webkit-scrollbar {
     color: rgba(0, 128, 0, 0.6);
     border: 1px solid rgba(0, 128, 0, 0.6);
     padding: 4px 10px;
-    font-weight: 800;
+    font-weight: 600;
+    letter-spacing: 1px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 12px;
@@ -578,20 +647,147 @@ body::-webkit-scrollbar {
 }
 
 
+/* WEATHER STUFF */
 
+
+.weatherHouse {
+    grid-area: wea;
+    /* display: grid; */
+    color: white;
+    padding-left: 10px;
+    background-color:  #bdc1e1d2;
+    border-radius: 13px;
+    font-family: recolata; 
+    transition: background-color .2s;
+
+}
+
+.weatherHouse:hover {
+    background-color:  #BDC1E1;
+
+}
+
+.weatherHouse:hover .presetsTitle {
+    letter-spacing: 3px;
+
+}
+.actualWeatherImage {
+    filter: grayscale(100%)
+}
+.presetTitle {
+text-align: center;
+font-size: 16px;
+color: white;
+width: 240px;
+margin: 0 auto;
+margin-top: 7px;
+border: 1px white solid;
+border-left: none;
+border-right: none;
+letter-spacing: 0px;
+transition: letter-spacing .2s;
+}
+
+.weatherHouse:hover .presetTitle {
+    letter-spacing: 2px;
+}
+
+.userPresetsHouse:hover .presetTitle {
+    letter-spacing: 2px;
+}
+
+.getLat {
+    display: block;
+    margin: auto;
+    width: 160px;
+    height: 50px;
+    margin-top: 80px;
+    /* margin: 20px; */
+    cursor: pointer;
+    font-family: recolata; 
+    border-radius: 15px;
+    border: 1px none white;
+    box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
+    transition: background-color .2s,  color .2s;
+}
+.getLat:focus {
+    outline: none;
+
+}
+
+.getLat:hover {
+    background-color: rgba(68, 68, 173, 0.3);
+    color: white;
+}
+
+
+.weatherImage {
+    box-sizing: border-box;
+    height: 100px;
+}
+.weatherSides {
+
+    display: block;
+}
+.weatherLeft {
+    /* padding: auto 0; */
+    display: inline-block;
+    width: 200px;
+    /* background-color: green; */
+    height: 250px;
+}
+
+.weatherRight {
+    display: inline-block;
+    float: right;
+    /* background-color: red; */
+    width: 280px;
+    padding-top: 15px;
+    font-size: 16px;
+    font-family: 'poppins';
+}
+.currentMode {
+    font-weight: 600;
+    text-transform: uppercase;
+    color:aquamarine;
+}
+
+.offline {
+    color:rgb(249, 132, 132);
+}
+
+.loading {
+    color:aquamarine;
+    animation: loading 1s infinite alternate;
+}
+
+
+@keyframes loading {
+
+    from {
+        color:aquamarine;
+    }
+
+    to {
+        /* border: 4px solid  rgba(68, 68, 173, 0.714); */
+        color:rgb(133, 127, 255);
+    }
+}
+
+.caps {
+    text-transform: capitalize;
+}
+/* TOP SETTINGS STUFF */
 .space {
     grid-area: space;
-    /* width: 20px; */
+  
 }
 
 .settingsHouse {
     grid-area: s;
-    /* position: relative; */
+
 }
 
-/* .relativeWrap {
-    position: relative;
-} */
 
 .set1,
 .set2,
@@ -634,7 +830,7 @@ body::-webkit-scrollbar {
     border-radius: 10px;
     cursor: pointer;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    transition: transform .2s ease-in-out;
+    transition: background-color .2s ease-in-out;
 }
 
 .musicalKeyBox {
@@ -657,8 +853,8 @@ body::-webkit-scrollbar {
 
 .musicalMoodBox:hover,
 .musicalKeyBox:hover {
-    transform: scale(1.01);
-    background-color:rgba(68, 68, 173, 0.2);
+    /* transform: scale(1.01); */
+    background-color:rgba(68, 68, 173, 0.2); 
 }
 
 
@@ -816,12 +1012,12 @@ body::-webkit-scrollbar {
 }
 .keys {
     width: 100px;
-    position: fixed;
+    /* position: fixed; */
     transform: translate(84px, 33px);
 }
 
 .moods {
-    position: fixed;
+    /* position: fixed; */
     width: 150px;
     transform: translate(24px,0px);
     font-size: 14px;
@@ -925,4 +1121,21 @@ body::-webkit-scrollbar {
     top: 30px;
     left: 14%;
     background-color: rgba(255, 255, 255, 0.66);
+}
+
+.effects {
+    border: 1px solid lightgrey;
+    font-size: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 50px;
+    margin: 0 auto;
+    color: rgb(150, 150, 150);
+    padding: 0 5px;
+}
+.effects:active {
+    background-color: rgba(68, 68, 173, 0.8);
+    color: white;
+    
 }
