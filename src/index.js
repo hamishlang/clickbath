@@ -362,7 +362,9 @@ const audioButton2 = $("#audio-button2");
 
 
 
-// this is similar to the last functions used for keys except for the actual tones (instruments)
+// THIS IS THE ACTUAL CLICKER FUNCTION THAT MAKES NOISE
+
+// It uses the mouses position to gauge its position within the div, to effect the pan (left and right speaker) and the note selection, it also checks the radios (finally!) to establish which sound wil play
 function synthSetup(theButton, panName, targetTwo, number) {
   let synthName;
   theButton.on('click', (e) => {
@@ -396,17 +398,16 @@ function synthSetup(theButton, panName, targetTwo, number) {
     let x = e.clientX - rect.left;
     let y = e.clientY - rect.top;
     //Convert new number into -1 - 1 range to work with Pan numbering
-
+    let xPanWidth = (Math.floor(x) / rect.width * 2) - 1
     //Convert number to format for actaves
     let octaveClick = 6 - (Math.floor((y / rect.height) * 5));
 
     let gradientPercY = y / rect.height * 100;
     let gradientPercX = x / rect.width * 100;
-
+    panName.pan.value = xPanWidth;
     $(targetTwo).css(
       'background', 'radial-gradient(at ' + gradientPercX + '% ' + gradientPercY + '%, rgba(255, 255, 255, 0.5)0%, rgba(101,141,210,0.0) 41%)');
 
-    console.log(octaveClick);
     synthName.triggerAttackRelease(noteArray(octaveClick), '1n');
   });
 };
