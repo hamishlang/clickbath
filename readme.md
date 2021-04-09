@@ -1,5 +1,5 @@
 
-# ![](https://github.com/hamishlang/clickbath/blob/main/clickbath.png  =250x) 
+# ![](https://github.com/hamishlang/clickbath/blob/main/clickbath.png  =250x100) 
 
 # Project 3: Click Bath
 by Hamish Lang
@@ -81,6 +81,6 @@ __Features Overview__
 - Sketch out the UI more, really wanted it to be responsive but ran out of time. 
 
 
-# ![](https://i.pinimg.com/originals/14/4b/9f/144b9fad1e750ec3b016988b5700c4d2.jpg  =250x) 
+# ![](https://i.pinimg.com/originals/14/4b/9f/144b9fad1e750ec3b016988b5700c4d2.jpg  =250x100) 
 
 
