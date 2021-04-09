@@ -5,6 +5,9 @@
 # Project 3: Click Bath
 by Hamish Lang
 
+<a href="https://hamishlang.github.io/clickbath/" target="_blank">View Hosted Project HERE</a>
+
+
 ### Overview
 
 Click Bath is an ambient music generator. It allows the user to click on one of two pads to produce a claiming tone. It can be used by musicians and non-musicians alike, no musical theory is required. 
