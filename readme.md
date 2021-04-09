@@ -1,5 +1,5 @@
 
-# ![](https://github.com/hamishlang/clickbath/blob/main/clickbath.png =250x100) 
+# ![](https://github.com/hamishlang/clickbath/blob/main/clickbath.png) 
 
 # Project 3: Click Bath
 by Hamish Lang
