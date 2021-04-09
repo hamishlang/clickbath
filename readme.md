@@ -1,80 +1,86 @@
-# ![](https://d.newsweek.com/en/full/1760172/ufo.jpg) 
-# ![](https://git.generalassemb.ly/hlang/jsr-202-projects/blob/master/unit2/unit2-%20HamishL/images/titleimage.png) 
+
+# ![](https://github.com/hamishlang/clickbath/blob/main/clickbath.png) 
 
 # Project 3: Click Bath
 by Hamish Lang
 
 ### Overview
 
-My goal was to create an over the top, sci-fi feed reader that would allow the user to filer, like, and remove articles based on how authentic the article is. 
+Click Bath is an ambient music generator. It allows the user to click on one of two pads to produce a claiming tone. It can be used by musicians and non-musicians alike, no musical theory is required. 
 
 __What's with the name?!?__
-Wanted something sci-fi looking, based the name of the Navy fighter Jet that discovered a UFO and was publicly announced recently. 
+The idea is a play on ‘sound baths’, which is usually just ambient music played live on non traditional instruments which is rising in popularity. Click bath does not require 
+
+
 
 __Design Inspirations__
 
 
-Inspired by the game 'Death Stranding', love how instense the UI is, and the use of colours. Also love the recent design of the 
-ǍCROŇYMř laptop by ASUS. Overtly futuristic.
+I wanted to do the opposite of my previous project, and provide the cleanest UI possible, with as little options or settings shown initially to ensure the app does not appear to be too complex or intimidating.  
+
+Music apps tend to be overtly settings heavy, which is in most cases ideal for usability. I believe though that this can make them less approachable for newcomers. 
+
 
 
 __Features Overview__
 
-- Reads three different API's for the main feed. These are searching different topics each. When the API's successfully finish calling, the data is merged into one object (called `comboSort` in the js file) and also split out into separate category objects for filtering. Due to the fact that my API's have a maximum call limit per day (100), I have an offline mode within the code at the very bottom.
+- Allows users to assign one of ten sounds to one of the two pads, the color of the pad will change depending on the tone selected when changed.
 
-- Allows the user to like and remove articles, these liked and removed articles can be viewed indepently, and altered.
+- Notes can be chosen from either a musical scale or a ‘mood’ based scale for non-musicians.
 
-- Results sorted by date.
+- Global Presets can be loaded from firebase.
 
-- Live search which scans both the article summary and title, is also not case sensitive. 
+- A weather specific preset can be loaded from the users location.
 
-- 'Picture of the Day', uses NASA's Picture of the day api to allow the user to view this in a separate popup.
+- Oscilloscopes that react to the sound being played. 
 
-- Dynamic UI features; Lots of feedback implemented to show the users actions. Can click outside of popup to close also.
+- Knobs with dynamic coloring.
 
-- No article erroring, if there are no articles showing in some views, an error message will display.
+- Dynamic selections that change other fields and update accordingly.
 
-- Braille animation to show user feedback.
+- Environmental soundscapes can be blended into the tones via the center knobs.
 
-- Black and white images go color on hover.
+- Pads randomly generate notes based on the tone and key, and based on the users mouse location within the pad, the sound will pan to the right or left speaker, and play a high tone at the top, or a low tone at the bottom.
 
-#### THINGS I WISH I COULD HAVE IMPLEMENTED (ran out of time) 
+- Selection of keys is, and presets, changes all states.
 
-(or upcoming features 😉)
+- Tones were created by myself, using a combination of synths, guitars, and pre recorded sample libraries.
 
-- Hide api keys, further tidy up code and optimise.
+#### TECH USED 
 
-- Remove function in popup window.
+- Tone.js for sound playback, musical control.
 
-- No content message for live search if all articles are removed. For some reason my function wouldn't work in this situation.
+- WebAudio Controls for the Knob interaction controls.
 
-- Create better loading animation
+- Nexus.js for Oscilloscope functionality.
 
-- I spent far too much time working on an animation for the braille interaction that used different delays for changing the characters and did this at random intervals. This is why the function is setup to print separate characters into separate divs. I ran into massive issues with blowing out the call stack doing this. It looked awesome, would love to figure out a solution for this with an instructor. 
+- LOTS of JQuery.
 
-- Allow user to search other terms ("ghosts", "monsters") by using existing API's but simply updating search work via input.
+- OpenWeather API.
 
-- Rating system. Thought it would be nice to have a feature where when selecting articles you could hover the squares to input a 1-10 score, to score how interesting it is. The like function is this but boolean essentially. 
+- Google Firebase.
 
-- Take out separate arrays for filters, simply assign a value to each object and then use a printing function that only prints the type based on the input. 
 
-- Offline / online toggle.
 
-- Color photo preview on/off. 
+#### FURTHER UPDATES NEEDED
 
-- Filter by date.
+- Responsive, mobile version.
+- Fix occasional clicks due to changing the pan.
+- Allow environmental effects to be assigned to presets and loaded.
+- Improve tones!
+- Clean up CSS, it’s a real mess!
+- Improve onload animations.
 
-- Hovering type in article shows filter list on click. 
 
 #### THINGS I WISH I DID FROM THE BEGINNING
 
-- I kept adding on features as I went, which made the code quite messy. If I had a clearer outline I would have combined the functions more effectively.
+- Use Sass!
 
-- No boiler plate for CSS and HTML, I wish I just started it a bit more from scratch (except for the excellent js file).
+- Wasted so much time using old libraries and reading docs for more recent version leading to huge headaches. 
 
-- Should of used different API's that didn't have limits on them.
+- Sketch out the UI more, really wanted it to be responsive but ran out of time. 
 
-- Bundled functions into different js files, the main js file became harder and harder to navigate over time. 
 
+# ![](https://i.pinimg.com/originals/14/4b/9f/144b9fad1e750ec3b016988b5700c4d2.jpg) 
 
 
