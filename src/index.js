@@ -363,11 +363,7 @@ const audioButton2 = $('#audio-button2');
 
 
 
-
-
-// THIS IS THE ACTUAL CLICKER FUNCTION THAT MAKES NOISE
-
-// It uses the mouses position to gauge its position within the div, to effect the pan (left and right speaker) and the note selection, it also checks the radios (finally!) to establish which sound wil play
+// pad listener, creates noise based on position, and active settings
 function synthSetup(theButton, panName, targetTwo, number,) {
   let synthName;
   theButton.on('click', (e) => {
@@ -393,10 +389,6 @@ function synthSetup(theButton, panName, targetTwo, number,) {
       synthName = tapeguitar;
     }
     synthName.connect(panName);
-
-    //TESTING
-
-    // synthName.connect(testChan);
 
     let rect = e.target.getBoundingClientRect();
     let x = e.clientX - rect.left;
@@ -461,7 +453,6 @@ let forest = new Tone.Player('assets/forest.mp3').toDestination();
 let beach = new Tone.Player('assets/beach.mp3').toDestination();
 let wind = new Tone.Player('assets/wind.mp3').toDestination();
 
-
 //setup the knob functionality
 function knobFunction(target, parent, toneName) {
   toneName.autostart = true;
@@ -473,7 +464,6 @@ function knobFunction(target, parent, toneName) {
     let volumeKnobEquation = (event.target.value * 0.5) - 50;
     $(parent).css('background-color', 'rgba(100,' + knobAdjust + ', 200, 0.3)')
     toneName.volume.value = volumeKnobEquation
-
     if (event.target.value > 0) {
       toneName.mute = false
     }
@@ -523,8 +513,6 @@ const cursor = document.querySelector('.cursor');
 const cursor2 = document.querySelector('.cursor2');
 const area1 = document.querySelector('.area');
 const area2 = document.querySelector('.area2');
-
-
 
 function cursorForBoxes(box, pointerBox) {
   $(pointerBox).hide();
@@ -578,10 +566,8 @@ keyDisplay('.selectedMood', '.moods');
 //menu display function
 let menuDisplay = (target, area) => {
   $(target).click(function () {
-
     if (target == '.options') {
       if ($(area).first().is(':hidden')) {
-
         $(area).slideDown(200);
         $('.options > span ').addClass('arrowFlip');
       } else {
@@ -609,12 +595,11 @@ let menuDisplay = (target, area) => {
   });
 }
 
-
 //establish button logic for both menus
 menuDisplay('.options', '.setarea');
 menuDisplay('.presets', '.presetsArea');
 
-//if there is change in the key activate it, also, if one is selected of the musical keys and the other isn't, select a note or key by default to ensure a key is selected
+//look for changes in key settings
 $('.keySettings').change(function () {
   showWeatherNotActive();
   // auto populate DIV with note when changed 
@@ -780,93 +765,14 @@ $('.moods').change(function () {
 
 
 
-//fire base stuff, ripped directly from our previous lesson, developed the app about 75% before trying to implement this into it. Firebase is used to store presets from the user
+//import keys
 import * as database from './database';
-
-
-// const buildMessageRow = (messageItem) => {
-//   const newMessageRow = document.createElement('tr');
-
-//   newMessageRow.setAttribute('id', messageItem.id);
-//   newMessageRow.innerHTML = `
-//     <td class='themessage'>${messageItem.Name}</td>
-//     <td class='voteCount'>${messageItem.votes}</td>
-//     <td class='actions'>
-//       <i class='material-icons upvote'>thumb_up</i>
-//       <i class='material-icons downvote'>thumb_down</i>
-//       <i class='material-icons delete'>delete</i>
-//     </td>
-//     <td class='load'>
-//     <div>LOAD</div>
-//     </td>
-    
-//   `;
-
-//   newMessageRow.querySelector('.upvote').addEventListener('click', async () => {
-//     await database.messages.updateVotes(messageItem.id, 1);
-//     renderList();
-//   });
-//   newMessageRow.querySelector('.downvote').addEventListener('click', async () => {
-//     await database.messages.updateVotes(messageItem.id, -1);
-//     renderList();
-//   });
-//   newMessageRow.querySelector('.delete').addEventListener('click', async () => {
-//     await database.messages.delete(messageItem.id);
-//     renderList();
-//   });
-//   //added this into allow the user to actually load presets from the list
-//   newMessageRow.querySelector('.load').addEventListener('click', async () => {
-//     console.log(messageItem);
-//     $(`#${messageItem.Tone1}`).prop('checked', true);
-//     $(`#${messageItem.Tone2}`).prop('checked', true);
-//     if (messageItem.keyMood !== '---') {
-//       console.log('it's a mood key')
-//       $(`#${messageItem.keyMood}`).prop('checked, true')
-//       setDaMood();
-//       showWeatherNotActive();
-//       gradientChanger('.gradient1', 1);
-//       gradientChanger('.gradient2', 2);
-//       $('.actualMood').text(messageItem.keyMood)
-
-//     }
-//     if (messageItem.keyNote !== '---') {
-//       console.log('it's a musical key')
-//       $(`#${messageItem.keyNote}`).prop('checked', true)
-//       $(`#${messageItem.keyScale}`).prop('checked', true)
-//       setDaKey()
-//       showWeatherNotActive();
-//       gradientChanger('.gradient1', 1);
-//       gradientChanger('.gradient2', 2);
-//       $('.actualNote').text(messageItem.keyNote);
-//       $('.actualKey').text(messageItem.keyScale);
-//     }
-//     notification(`${messageItem.Name} loaded`)
-//     // renderList();
-//   });
-//   return newMessageRow;
-// };
-
-// const renderList = async () => {
-//   const listContainer = document.getElementById('message-container');
-
-//   // get latest messages
-//   const messages = await database.messages.getAll();
-
-//   // reset list container to empty
-//   listContainer.innerHTML = '';
-
-//   // remove children from list container
-//   messages.forEach((messageItem) => {
-//     const newMessageRow = buildMessageRow(messageItem);
-//     listContainer.append(newMessageRow);
-//   });
-// };
 
 
 const onLoadHandler = async () => {
   gradientChanger('.gradient1', 1);
   gradientChanger('.gradient2', 2);
-  $('.hiddenKnobs').delay(800).slideDown(800);
+  $('.hiddenKnobs').delay(3000).slideDown(800);
   ;
 };
 
@@ -1082,6 +988,14 @@ $('.about').click(function () {
       $('.aboutinfo').fadeOut(400);
       $('.about').html('?')
     };
+});
+
+$('#title').click(function () {
+
+  if ($('.aboutinfo').is(':hidden')) {
+    $('.aboutinfo').fadeIn(400);
+    $('.about').html('X')
+  } 
 });
 
 $('.aboutinfo').click(function () {
