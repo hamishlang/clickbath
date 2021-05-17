@@ -1,6 +1,6 @@
 
 <!-- # ![](https://github.com/hamishlang/clickbath/blob/main/clickbath.png | width=100)  -->
-<img src="https://github.com/hamishlang/clickbath/blob/main/clickbath.png " width="400">
+<img src="https://raw.githubusercontent.com/hamishlang/clickbath/main/clickbath.png " width="400">
 
 # Project 3: Click Bath
 by Hamish Lang

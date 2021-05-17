@@ -3,7 +3,8 @@
 *::after {
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;;
+    /* width: 0px; */
 }
 
 html {
@@ -18,7 +19,7 @@ html {
 a {
     width: 200px;
     height: 200px;
-    background-color: red;
+
 }
 
 @font-face {
@@ -77,22 +78,13 @@ a {
 
 
 .area {
-    /* background: linear-gradient(180deg, rgba(232, 232, 232, 0.4) 0%, rgba(103, 103, 103, 0.4) 50%, rgba(129, 129, 130, 0.7) 100%); */
+
     display: inline-block;
     grid-area: a1;
-    /* cursor: none; */
+
 }
 
 .area2 {
-    /* default */
-    
-     /* Synth */
-    /* background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109, 0.4) 50%, rgba(101, 141, 210, 1) 100%) *//* Piano */
-    /* background: linear-gradient(180deg, rgba(0, 212, 255, 0.4) 0%, rgba(68, 68, 173, 0.4) 50%, rgba(101, 141, 210, 1) 100%); */
-    /* Casio 1 */
-    /* background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109, 0.4) 50%, rgba(101, 141, 210, 1) 100%) *//* Strings 1 */
-    /* background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109, 0.4) 50%, rgba(101, 141, 210, 1) 100%) *//* Flute */
-    /* background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109, 0.4) 50%, rgba(101, 141, 210, 1) 100%) */
     display: inline-block;
     grid-area: a2;
 }
@@ -153,20 +145,12 @@ background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109
         '.   s s s . '
         ' ss ss ss ss ss'
         ' a1 a1 k a2 a2 '
+        '. . . . .'
+        '. . . . .'
     ;
 }
 
-@media only screen and (max-width: 1059px) {
-    .parentArea {
-        grid-template-areas:
-            ' s s'
-            ' ss ss'
-            ' a1 k'
-            ' a2 .'
-        ;
-        max-width: 600px;
-    }
-}
+
 
 .nothing {
     color: rgb(220, 220, 220);
@@ -179,12 +163,12 @@ background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109
     height: 30px;
     display: inline-block;
 } */
-.hiddenKnobs span {
+.hiddenKnobs p {
     color: rgb(206, 206, 206);
     transition: background-color .4s ease-in-out;
 }
 
-.hiddenKnobs span:active {
+.hiddenKnobs p:active {
     color: rgba(68, 68, 173, 1);
 }
 
@@ -198,16 +182,21 @@ background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109
 }
 
 .allKnobs {
-    display: inline-block;
+    /* display: inline-block; */
     width: 60px;
     font-size: 12px;
     /* color: rgba(211, 211, 211, 0.3) */
     /* height: 200px; */
     background-color: white;
     grid-area: k;
-    height: 705px;
+    /* height: 705px; */
+    /* display: grid; */
 }
 
+.knobHolder {
+    display: inline-block;
+    /* margin-left: 10px; */
+}
 
 
 #oscilloscope,
@@ -309,7 +298,7 @@ background: linear-gradient(180deg, rgba(0, 255, 217, 0.4) 0%, rgba(42, 105, 109
     }
 
     to {
-        /* border: 4px solid  rgba(68, 68, 173, 0.714); */
+
         box-shadow: 0px 0px 20px white;
     }
 }
@@ -582,11 +571,12 @@ table {
 .userpresets {
     height: 210px;
     overflow-y : auto;
-    width: 389px;
+    width: 290px;
     background-color: white;
     border-radius: 8px;
     margin: 0px auto;
-    padding-left: 2px;
+    margin-top: 10px;
+    padding-left: 5px;
     /* overflow-x: hidden; */
 }
 
@@ -1220,6 +1210,7 @@ font-weight: 200;
     padding: 0 5px;
     transition: all .2s;
     font-family: 'poppins';
+    height: 13px;
 }
 .effects:active {
     background-color: rgba(68, 68, 173, 0.8);
@@ -1246,3 +1237,196 @@ font-weight: 200;
     color: lightgrey;
     z-index: -500;
 }
+
+@media only screen and (max-width: 1059px) {
+    html {
+        width: 100%;
+        overflow-y: none;
+    }
+    .title {
+        font-size: 30px
+    }
+
+    .settingsButton {
+        font-size: 10px;
+    }
+    
+    .parentArea {
+        grid-template-columns: repeat(1, 1fr);
+            grid-template-areas:
+            's s s s s'
+            'ss . . . .'
+            'a1 a1 a1 a1 a1'
+            'k . . . .'
+            'a2 . . . .'
+            
+            ;
+            width: 95%;
+            overflow: none;
+            /* grid-template-rows: auto; 
+            grid-template-columns:  auto; */
+    }
+
+    .gradient1,
+    .gradient2 {
+    border-radius: 20px;
+    /* position: absolute; */
+    width: 95%;
+    height: 700px;
+    margin-bottom: 50px;
+
+}
+
+
+.setArea{
+
+    grid-template-areas:
+        'one'
+        'two' 
+        'space'
+    ;
+    
+}
+
+.settingsArea {
+    width: 370px;
+    height: 700px;
+    grid-template-columns: auto;
+}
+
+
+
+
+.set1 {
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.set2 {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+
+}
+
+
+.presetsArea {
+
+    grid-template-areas:
+        'up' 
+        'wea'; 
+    }
+    #oscilloscope,
+    #oscilloscope2 {
+        height: 700px;
+        width: 95%;
+    
+    
+    }
+
+    .area,
+.areaShow,
+.areaShow2,
+.area2 {
+    cursor: pointer;
+    width: 100%;
+    /* height: 100%; */
+    /* margin: auto 0; */
+    border-radius: 20px;
+    margin-bottom: 20px;
+} 
+
+.allKnobs {
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+
+.knobHolder {
+    margin-left: 2%;
+}
+
+.allKnobs {
+    height: 100%;
+}
+
+.effects,
+.effects:hover {
+    height: 30px;
+    width: 90px;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.keySettings {
+    background-color: white;
+}
+
+.cursor,
+.cursor2 {
+    display: none;
+}
+}
+
+.about {
+    background-color:  rgb(209, 209, 253);
+    color: white;
+    font-size: 17px;
+    font-family: 'poppins';
+    display: inline-block;
+    position: fixed;
+    padding: 8px 10px;
+    border-bottom-left-radius: 15px;
+    right: 0;
+    width: 40px;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    transition: background-color .2s ease-in-out;
+    z-index: 2000;
+}
+
+.about:hover {
+    background-color:  rgb(145, 145, 207);
+}
+
+.about:active {
+    background-color: red;
+}
+.aboutinfo {
+    background-color:  rgb(145, 145, 207);
+    opacity: 0.98;
+    color: white;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    font-family: 'poppins';
+    text-align: center;
+    z-index: 2000;
+    font-size: 20px;
+}
+
+.innerabout {
+    padding: 5% 1%;
+    
+    max-width: 600px;
+    margin: auto;
+
+
+}
+
+.innerabout h1 {
+    font-family: recolata;
+}
+
+.innerabout p {
+    font-size: 14px;
+    text-align: left;
+   
+}
+
+.aboutinfo a {
+    color: white;
+}
+
