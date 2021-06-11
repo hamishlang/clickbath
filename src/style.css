@@ -1368,6 +1368,20 @@ font-weight: 200;
     margin-bottom: 100px;
 }
 
+.notes {
+    transform: translate(100px, 33px);
+}
+.keys {
+    width: 100px;
+    transform: translate(170px, 33px);
+}
+
+.moods {
+    width: 150px;
+    transform: translate(110px,0px);
+    font-size: 14px;
+}
+
 /* END OF MEDIA QUERY */
 }
 
